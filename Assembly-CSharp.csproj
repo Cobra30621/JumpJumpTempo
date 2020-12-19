@@ -295,6 +295,9 @@
  <Reference Include="Unity.Analytics.StandardEvents">
  <HintPath>/Users/cobra/Unity專案/MathGame2/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
  </Reference>
+ <Reference Include="DOTween">
+ <HintPath>/Users/cobra/Unity專案/MathGame2/Assets/Plugins/Demigiant/DOTween/DOTween.dll</HintPath>
+ </Reference>
  <Reference Include="netstandard">
  <HintPath>/Applications/Unity/Hub/Editor/2018.3.11f1/Unity.app/Contents/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
  </Reference>
@@ -640,6 +643,10 @@
  <Reference Include="mscorlib">
  <HintPath>/Applications/Unity/Hub/Editor/2018.3.11f1/Unity.app/Contents/NetStandard/compat/2.0.0/shims/netfx/mscorlib.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{F81581EB-F478-EEF2-A388-93D21B66DFCE}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
