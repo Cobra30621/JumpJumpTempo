@@ -22,6 +22,9 @@ public class StageSystem : IGameSystem
 
 	public int grade;
 	public int addGrade;
+	public int[] addGrades = {1,2,4,6,8,10,12,15,18,21,24,30, 45, 60 };
+	public int bestGrade;
+
 	public float correctCount;
 	public float needCorrectCount;
 	public int allCorrectCount;
@@ -53,10 +56,15 @@ public class StageSystem : IGameSystem
 
 	public override void Update()
 	{
-		if(Input.GetKeyDown(KeyCode.LeftArrow))
+		if(Input.GetKeyDown(KeyCode.R))
+				StartGame();
+		if(gameState == GameState.Gaming){
+			if(Input.GetKeyDown(KeyCode.LeftArrow))
 			AnswerQuetion(Answer.A);
-		if(Input.GetKeyDown(KeyCode.RightArrow))
-			AnswerQuetion(Answer.B);
+			if(Input.GetKeyDown(KeyCode.RightArrow))
+				AnswerQuetion(Answer.B);
+		}
+		
 		GameProcess();
 	}
 
@@ -93,14 +101,27 @@ public class StageSystem : IGameSystem
 		CreateNextQuetion();
 
 		gameState = GameState.Gaming;
+		_mainGameUI.HideEndPanel();
 	}
 
 	public void GamingProcess(){
 		time -= Time.deltaTime;
 		if(time < 0){
-			gameState = GameState.WaitStart;
+			EndGame();
+			
 			Debug.Log("遊戲結束");
 		}
+	}
+
+	public void EndGame(){
+		SetBestGrade();
+		_mainGameUI.ShowEndPanel();
+		gameState = GameState.WaitStart;
+	}
+
+	public void SetBestGrade(){
+		if(grade > bestGrade)
+			bestGrade = grade;
 	}
 
 
@@ -108,11 +129,11 @@ public class StageSystem : IGameSystem
     /// 關卡的切換
     /// </summary>
 
-	public void SetStage(StageData stageData){
+	public void SetStage(IStageData stageData){
 		_nowStage = stageData;
-		_levelDatas = stageData.levelDatas;
-		_nowLevel = stageData.levelDatas[0];
-		maxLevel = stageData.levelDatas.Length - 1;
+		_levelDatas = stageData.GetLevelDatas();
+		_nowLevel = _levelDatas[0];
+		maxLevel = _levelDatas.Length - 1;
 		totalTime = stageData.totalTime;
 
 		_mainGameUI.SetStageInfo(); // 設置關卡的UI
@@ -120,13 +141,18 @@ public class StageSystem : IGameSystem
 
 	public void ResetStage(){
 		time = _nowStage.totalTime;
+
 		grade = 0;
+		addGrade = 1;
+		combo = 0;
+
 		correctCount = 0;
 		allCorrectCount = 0;
 		errorCount = 0;
-		combo = 0;
+
 		nowLevel = 0;
 		_nowLevel = _levelDatas[nowLevel];
+		
 	}
 
 	public void UpgradeLevel(){
@@ -134,6 +160,7 @@ public class StageSystem : IGameSystem
 			nowLevel ++;
 			_nowLevel = _levelDatas[nowLevel];
 			time += _nowLevel.addTime;
+			addGrade = addGrades[nowLevel];
 			SetLevel();
 			Debug.Log($"進入第{nowLevel}關");
 			_mainGameUI.SetLevelInfo(); // 設置下一關的UI
@@ -156,18 +183,22 @@ public class StageSystem : IGameSystem
 		if (answer == nowAnswer){ // 答對
 			correctCount++;
 			allCorrectCount++;
-			Debug.Log("答對");
-			if(allCorrectCount >= needCorrectCount){
+			combo++;
+			grade += addGrade;
+			_mainGameUI.SetWhetherCorrect(true); // 顯示答對錯資訊
+			Debug.Log($"答對,答對題數為{correctCount}");
+			if(correctCount >= needCorrectCount){
 				UpgradeLevel(); // 到下一關
 			}
-			CreateNextQuetion();
-			
 		}
 		else{ // 答錯
 			errorCount ++;
+			combo = 0;
 			time -= _nowLevel.subTime;
+			_mainGameUI.SetWhetherCorrect(false); // 顯示答對錯資訊
 			Debug.Log("答錯");
 		}
+		CreateNextQuetion();
 	}
 
 	public void CreateNextQuetion(){

@@ -13,6 +13,9 @@ public class MainGameUI: MonoBehaviour
     [SerializeField] private Text lab_title;
     [SerializeField] private Text lab_quetion;
     [SerializeField] private Text lab_time;
+    [SerializeField] private Text lab_grade;
+    [SerializeField] private Text lab_addGrade;
+    [SerializeField] private Text lab_combo;
 
     [SerializeField] private Image img_progressBG;
     [SerializeField] private Image img_progressFG;
@@ -22,6 +25,14 @@ public class MainGameUI: MonoBehaviour
     [SerializeField] private Button butt_B;
     [SerializeField] private Text lab_A;
     [SerializeField] private Text lab_B;
+
+    [Header("結算畫面")]
+    [SerializeField] private GameObject EndPanel;
+    [SerializeField] private Text lab_Endgrade;
+    [SerializeField] private Text lab_bestGrade;
+    [SerializeField] private Text lab_correctCount;
+    // [SerializeField] private Button butt_Retry;
+
 
     /// <summary>
     /// Awake is called when the script instance is being loaded.
@@ -67,16 +78,22 @@ public class MainGameUI: MonoBehaviour
 
     public void SetLevelInfo(){
         ILevelData levelData = stageSystem._nowLevel;
-        lab_A.text = levelData.QA_name;
-        lab_B.text = levelData.QB_name;
+        IStageData stageData = stageSystem._nowStage;
+        lab_A.text = stageData.QA_name;
+        lab_B.text = stageData.QB_name;
+        lab_addGrade.text = $"x{stageSystem.addGrade}" ;
 
         img_progressBG.color = stageSystem.GetBGColor();
         img_progressFG.color = stageSystem.GetFGColor();
+        
     }
 
     public void RefreshProgressBar(){
         float rate = stageSystem.correctCount / stageSystem.needCorrectCount;
+        if(rate > 1){rate = 1;}
+
         img_progressFG.gameObject.transform.localScale = new Vector3(rate, 1, 1);
+        lab_grade.text = stageSystem.grade + "";
     }
 
     public void RefreshTimeBar(){
@@ -87,12 +104,34 @@ public class MainGameUI: MonoBehaviour
 
     public void SetNextQuetion(){
         lab_quetion.text = stageSystem.nowQuetion;
+        lab_combo.text = $"combo:{stageSystem.combo}";
         RefreshProgressBar();
     }
 
-    [SerializeField]
     public void AnswerQuetion(Answer answer){
         stageSystem.AnswerQuetion(answer);
+    }
+
+    public void SetWhetherCorrect(bool bo){
+        // lab_correct.text = bo ? "答對了" : "答錯了"; 
+    }
+
+    /// <summary>
+    ///  設置結算畫面
+    /// </summary>
+    public void ShowEndPanel(){
+        EndPanel.SetActive(true);
+        lab_bestGrade.text = $"Best Grade:{stageSystem.bestGrade}";
+        lab_Endgrade.text = $"Grade:{stageSystem.grade}";
+        lab_correctCount.text = $"Correct Count:{stageSystem.allCorrectCount}";
+    }
+
+    public void HideEndPanel(){
+        EndPanel.SetActive(false);
+    }
+
+    public void Retry(){
+        stageSystem.StartGame();
     }
 
 }

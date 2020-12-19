@@ -62,6 +62,8 @@
      <Compile Include="Assets\Scripts\Stage\Data\ILevelData.cs" />
      <Compile Include="Assets\Scripts\Stage\Data\IStageData.cs" />
      <Compile Include="Assets\Scripts\Stage\Data\LevelData.cs" />
+     <Compile Include="Assets\Scripts\Stage\Data\MathLevelData.cs" />
+     <Compile Include="Assets\Scripts\Stage\Data\MathStageData.cs" />
      <Compile Include="Assets\Scripts\Stage\Data\StageData.cs" />
      <Compile Include="Assets\Scripts\Stage\MainGameUI.cs" />
      <Compile Include="Assets\Scripts\Stage\StageSystem.cs" />

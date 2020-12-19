@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameLoop : MonoBehaviour
 {
-    public StageData stageData;
+    public IStageData stageData;
+    
     static GameLoop instance;
     void Awake () {
         if (instance==null)

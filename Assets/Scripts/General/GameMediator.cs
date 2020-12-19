@@ -37,7 +37,7 @@ public class GameMediator
 		return _stageSystem;
 	}
 
-	public void SetStage(StageData stageData){
+	public void SetStage(IStageData stageData){
 		_stageSystem.SetStage(stageData);
 	}
 

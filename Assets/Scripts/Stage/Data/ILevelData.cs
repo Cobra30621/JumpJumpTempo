@@ -3,28 +3,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
-// [CreateAssetMenu(fileName= "StickerData", menuName= "Pratiti/Craete StickerData")]
-public class ILevelData : ScriptableObject{
-    public string levelName;
-    public int needCorrectCount;
-    public float addTime;
-    public float subTime;
-    
-    public Color barColor;
-    public Sprite img_bar;
+[System.Serializable]
+public class ILevelData {
+    public int needCorrectCount = 3;
+    public float addTime = 3;
 
-    public string QA_name;
-    public string[] QAs;
+    [HideInInspector]
+    public float subTime = 3;
     
-    public string QB_name;
+    [HideInInspector]
+    public Color barColor;
+    // public Sprite img_bar;
+
+    [HideInInspector]
+    public string[] QAs;
+
+    
+
+    [HideInInspector]
     public string[] QBs;
     
+
+    public virtual void SetQuetion(){}
+
+    public virtual void Init(){
+        needCorrectCount = 3;
+        addTime = 3;
+        subTime = 3;
+        barColor = Color.white;
+    }
 
     public string GetQuetion(int r){
         int r2;
 		if(r == 0){
-            if(QAs == null){
-                Debug.Log($"{levelName}的QAs沒有題目，請賦予題目");
+            if(QAs.Length == 0){
+                Debug.Log($"QAs沒有題目，請賦予題目");
                 return "";
             }
 
@@ -32,8 +45,8 @@ public class ILevelData : ScriptableObject{
 			return QAs[r2];
 		}
 		else{
-            if(QBs == null){
-                Debug.Log($"{levelName}的QBs沒有題目，請賦予題目");
+            if(QBs.Length == 0){
+                Debug.Log($"QBs沒有題目，請賦予題目");
                 return "";
             }
 
