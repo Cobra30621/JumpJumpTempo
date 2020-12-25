@@ -23,16 +23,26 @@ MonoBehaviour:
   - {r: 1, g: 1, b: 1, a: 1}
   - {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
+  upgradeTexts:
+  - OK
+  - Good
+  - Great
+  - Prefect
+  - Excellent
+  - Pro
+  - Master
+  - God
+  - Stone
   stageName: OAO
   questionName: "\u4E0B\u5217\u6578\u5B57\u662F\u5426\u70BA3\u7684\u500D\u6578?"
-  totalTime: 20
+  totalTime: 15
   QA_name: "\u662F"
   QB_name: "\u5426"
   levelDatas: []
   prime: 3
   mathLevelDatas:
   - needCorrectCount: 3
-    addTime: 3
+    addTime: 2
     subTime: 3
     barColor: {r: 1, g: 0, b: 0, a: 1}
     QAs:
@@ -72,7 +82,7 @@ MonoBehaviour:
     min: 1
     max: 9
   - needCorrectCount: 3
-    addTime: 3
+    addTime: 2
     subTime: 3
     barColor: {r: 1, g: 0.64, b: 0, a: 1}
     QAs:
@@ -106,8 +116,8 @@ MonoBehaviour:
     - 17
     min: 10
     max: 19
-  - needCorrectCount: 3
-    addTime: 3
+  - needCorrectCount: 5
+    addTime: 2
     subTime: 3
     barColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
     QAs:
@@ -176,7 +186,7 @@ MonoBehaviour:
     - 38
     min: 30
     max: 39
-  - needCorrectCount: 5
+  - needCorrectCount: 7
     addTime: 3
     subTime: 3
     barColor: {r: 0, g: 1, b: 1, a: 1}
@@ -211,7 +221,7 @@ MonoBehaviour:
     - 47
     min: 40
     max: 49
-  - needCorrectCount: 5
+  - needCorrectCount: 7
     addTime: 3
     subTime: 3
     barColor: {r: 0.64, g: 0, b: 1, a: 1}
@@ -246,8 +256,8 @@ MonoBehaviour:
     - 58
     min: 50
     max: 59
-  - needCorrectCount: 7
-    addTime: 3
+  - needCorrectCount: 9
+    addTime: 5
     subTime: 3
     barColor: {r: 1, g: 1, b: 1, a: 1}
     QAs:
@@ -311,7 +321,7 @@ MonoBehaviour:
     - 77
     min: 60
     max: 79
-  - needCorrectCount: 7
+  - needCorrectCount: 9
     addTime: 5
     subTime: 3
     barColor: {r: 0, g: 0, b: 0, a: 1}
@@ -376,7 +386,7 @@ MonoBehaviour:
     - 98
     min: 80
     max: 99
-  - needCorrectCount: 7
+  - needCorrectCount: 10
     addTime: 5
     subTime: 3
     barColor: {r: 1, g: 0, b: 0.988338, a: 1}

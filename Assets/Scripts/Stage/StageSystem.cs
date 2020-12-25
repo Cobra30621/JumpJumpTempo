@@ -185,7 +185,8 @@ public class StageSystem : IGameSystem
 			allCorrectCount++;
 			combo++;
 			grade += addGrade;
-			_mainGameUI.SetWhetherCorrect(true); // 顯示答對錯資訊
+			
+			_mainGameUI.PlayCorrectAnime();
 			Debug.Log($"答對,答對題數為{correctCount}");
 			if(correctCount >= needCorrectCount){
 				UpgradeLevel(); // 到下一關
@@ -195,7 +196,6 @@ public class StageSystem : IGameSystem
 			errorCount ++;
 			combo = 0;
 			time -= _nowLevel.subTime;
-			_mainGameUI.SetWhetherCorrect(false); // 顯示答對錯資訊
 			Debug.Log("答錯");
 		}
 		CreateNextQuetion();

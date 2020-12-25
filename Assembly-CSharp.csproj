@@ -53,6 +53,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Anime\ScalingAnime.cs" />
+     <Compile Include="Assets\Scripts\Anime\ShowUpgradeAnime.cs" />
      <Compile Include="Assets\Scripts\BaseClass\IGameSystem.cs" />
      <Compile Include="Assets\Scripts\Factory\AssetFactory\IAssetFactory.cs" />
      <Compile Include="Assets\Scripts\Factory\AssetFactory\ResourceAssetFactory.cs" />
@@ -286,6 +288,9 @@
  <Reference Include="UnityEngine.SpatialTracking">
  <HintPath>/Applications/Unity/Hub/Editor/2018.3.11f1/Unity.app/Contents/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
+ <Reference Include="DOTween">
+ <HintPath>/Users/cobra/Unity專案/MathGame2/Assets/Plugins/Demigiant/DOTween/DOTween.dll</HintPath>
+ </Reference>
  <Reference Include="Unity.Analytics.Tracker">
  <HintPath>/Users/cobra/Unity專案/MathGame2/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
  </Reference>
@@ -294,9 +299,6 @@
  </Reference>
  <Reference Include="Unity.Analytics.StandardEvents">
  <HintPath>/Users/cobra/Unity專案/MathGame2/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
- </Reference>
- <Reference Include="DOTween">
- <HintPath>/Users/cobra/Unity專案/MathGame2/Assets/Plugins/Demigiant/DOTween/DOTween.dll</HintPath>
  </Reference>
  <Reference Include="netstandard">
  <HintPath>/Applications/Unity/Hub/Editor/2018.3.11f1/Unity.app/Contents/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

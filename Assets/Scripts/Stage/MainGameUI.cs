@@ -25,12 +25,15 @@ public class MainGameUI: MonoBehaviour
     [SerializeField] private Button butt_B;
     [SerializeField] private Text lab_A;
     [SerializeField] private Text lab_B;
+    [SerializeField] private Text lab_showUpgrade;
+    [SerializeField] private ShowUpgradeAnime showUpgradeAnime;
 
     [Header("結算畫面")]
     [SerializeField] private GameObject EndPanel;
     [SerializeField] private Text lab_Endgrade;
     [SerializeField] private Text lab_bestGrade;
     [SerializeField] private Text lab_correctCount;
+    [SerializeField] private Text lab_level;
     // [SerializeField] private Button butt_Retry;
 
 
@@ -86,6 +89,20 @@ public class MainGameUI: MonoBehaviour
         img_progressBG.color = stageSystem.GetBGColor();
         img_progressFG.color = stageSystem.GetFGColor();
         
+        // 播放生階動畫
+        int index = stageSystem.nowLevel - 1;
+        if(index <0) 
+            return;
+            
+        if(index >= stageData.upgradeTexts.Length)
+            index = stageData.upgradeTexts.Length -1;
+        
+        lab_showUpgrade.text = stageData.upgradeTexts[index];
+        lab_showUpgrade.color = stageSystem.GetBGColor();
+        // 設定結算介面等級
+        lab_level.text = stageData.upgradeTexts[index];
+        lab_level.color = stageSystem.GetBGColor();
+        showUpgradeAnime.Scaling(); 
     }
 
     public void RefreshProgressBar(){
@@ -94,6 +111,10 @@ public class MainGameUI: MonoBehaviour
 
         img_progressFG.gameObject.transform.localScale = new Vector3(rate, 1, 1);
         lab_grade.text = stageSystem.grade + "";
+    }
+
+    public void PlayCorrectAnime(){
+        lab_grade.GetComponent<ScalingAnime>().Scaling();
     }
 
     public void RefreshTimeBar(){
@@ -112,9 +133,6 @@ public class MainGameUI: MonoBehaviour
         stageSystem.AnswerQuetion(answer);
     }
 
-    public void SetWhetherCorrect(bool bo){
-        // lab_correct.text = bo ? "答對了" : "答錯了"; 
-    }
 
     /// <summary>
     ///  設置結算畫面
