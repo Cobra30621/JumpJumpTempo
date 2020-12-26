@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using System;
 
 public enum Answer{A = 0,B = 1};
 public enum GameState{WaitStart , Gaming};
-
+public enum GamingState {Questioning, Answering, Texting, Fever};
 public class StageSystem : IGameSystem
 {
 	public float time;
@@ -20,6 +20,12 @@ public class StageSystem : IGameSystem
 		}
 	}
 
+	// 出題目相關
+	public float questioningInterval = 0.5f; // 出題頻率
+	public float nextTurnInterval = 0.5f; // 下一輪題目的頻率
+
+
+	// 分數相關
 	public int grade;
 	public int addGrade;
 	public int[] addGrades = {1,2,4,6,8,10,12,15,18,21,24,30, 45, 60 };
@@ -38,9 +44,15 @@ public class StageSystem : IGameSystem
 	public int nowLevel;
 	public int maxLevel;
 
+	public int questionCount = 3;
 	public string nowQuetion;
+	public string[] nowQuestions;
 	public Answer nowAnswer;
+	public Answer[] nowAnswers;
+	public int hadAnswerQuestionCount;
+
 	public GameState gameState;
+	public GamingState gamingState;
 
 	public MainGameUI _mainGameUI;
     public StageSystem(GameMediator meditor):base(meditor)
@@ -51,20 +63,15 @@ public class StageSystem : IGameSystem
 
     public override void Initialize()
     {
+		nowAnswers = new Answer[questionCount];
+		nowQuestions = new string[questionCount];
         gameState = GameState.WaitStart;
     }
 
 	public override void Update()
 	{
 		if(Input.GetKeyDown(KeyCode.R))
-				StartGame();
-		if(gameState == GameState.Gaming){
-			if(Input.GetKeyDown(KeyCode.LeftArrow))
-			AnswerQuetion(Answer.A);
-			if(Input.GetKeyDown(KeyCode.RightArrow))
-				AnswerQuetion(Answer.B);
-		}
-		
+			StartGame();
 		GameProcess();
 	}
 
@@ -92,23 +99,46 @@ public class StageSystem : IGameSystem
 			case GameState.Gaming:
 				GamingProcess();
 				break;
+			default:
+				Debug.LogError("GameState為錯誤狀態:" + Enum.GetName(typeof(GameState), gameState ));
+				break;
 		}
     }
 
 	public void StartGame(){
 		ResetStage();
 		SetLevel();
-		CreateNextQuetion();
+		CreateNextQuestion();
 
 		gameState = GameState.Gaming;
+		gamingState = GamingState.Questioning;
 		_mainGameUI.HideEndPanel();
 	}
 
+	
+
 	public void GamingProcess(){
+		switch(gamingState){
+			case GamingState.Questioning:
+				break;
+			case GamingState.Answering:
+				if(Input.GetKeyDown(KeyCode.LeftArrow))
+					AnswerQuestion(Answer.A);
+				if(Input.GetKeyDown(KeyCode.RightArrow))
+					AnswerQuestion(Answer.B);
+				break;
+			case GamingState.Texting:
+				break;
+			case GamingState.Fever:
+				break;
+			default:
+				Debug.LogError("GamingState為錯誤狀態:" + Enum.GetName(typeof(GamingState), gamingState ));
+				break;
+		}
+
 		time -= Time.deltaTime;
 		if(time < 0){
 			EndGame();
-			
 			Debug.Log("遊戲結束");
 		}
 	}
@@ -128,7 +158,6 @@ public class StageSystem : IGameSystem
 	/// <summary>
     /// 關卡的切換
     /// </summary>
-
 	public void SetStage(IStageData stageData){
 		_nowStage = stageData;
 		_levelDatas = stageData.GetLevelDatas();
@@ -179,34 +208,63 @@ public class StageSystem : IGameSystem
 	/// <summary>
     /// 關卡內部運作
     /// </summary>
-	public void AnswerQuetion(Answer answer){
-		if (answer == nowAnswer){ // 答對
-			correctCount++;
-			allCorrectCount++;
-			combo++;
-			grade += addGrade;
-			
-			_mainGameUI.PlayCorrectAnime();
-			Debug.Log($"答對,答對題數為{correctCount}");
-			if(correctCount >= needCorrectCount){
-				UpgradeLevel(); // 到下一關
+	public void AnswerQuestion(Answer answer){
+		// 設置問題
+		nowAnswer = nowAnswers[hadAnswerQuestionCount];
+		hadAnswerQuestionCount++;
+
+		if(hadAnswerQuestionCount == questionCount)
+		{
+			Debug.Log("這一輪的問題答完了");
+			gamingState  = GamingState.Questioning;
+			// MonoBehaviour.StartCoroutine(WaitForCreateNextTurnQuestion());
+			CreateNextQuestion();
+		}
+		else{
+			if (answer == nowAnswer){ // 答對
+				correctCount++;
+				allCorrectCount++;
+				combo++;
+				grade += addGrade;
+				
+				_mainGameUI.PlayCorrectAnime();
+				Debug.Log($"答對,答對題數為{correctCount}");
+				if(correctCount >= needCorrectCount){
+					UpgradeLevel(); // 到下一關
+				}
+			}
+			else{ // 答錯
+				errorCount ++;
+				combo = 0;
+				time -= _nowLevel.subTime;
+				_mainGameUI.PlayWrongAnime();
+				Debug.Log("答錯");
 			}
 		}
-		else{ // 答錯
-			errorCount ++;
-			combo = 0;
-			time -= _nowLevel.subTime;
-			Debug.Log("答錯");
-		}
-		CreateNextQuetion();
 	}
 
-	public void CreateNextQuetion(){
-		int r = Random.Range(0,2);
-		nowQuetion = _nowLevel.GetQuetion(r);
-		nowAnswer = (Answer)r;
+	IEnumerator WaitForCreateNextTurnQuestion(){
+		yield return new WaitForSeconds(nextTurnInterval);
+        Debug.Log($"等待完{nextTurnInterval}秒後，創造下一輪題目");
+        CreateNextQuestion();
+	}
 
-		_mainGameUI.SetNextQuetion();
+	public void CreateNextQuestion(){
+		for(int i = 0; i < questionCount; i++){
+			int r = UnityEngine.Random.Range(0,2);
+			nowQuestions[i] = _nowLevel.GetQuetion(r);
+			nowAnswers[i] = (Answer)r;
+		}
+
+		// nowQuetion = _nowLevel.GetQuetion(r);
+		// nowAnswer = (Answer)r;
+
+		_mainGameUI.SetNextQuestions();
+	}
+
+	public void AllQuestionHadCreate(){
+		hadAnswerQuestionCount = 0;
+		gamingState  = GamingState.Answering;
 	}
 
 	public Color GetBGColor(){

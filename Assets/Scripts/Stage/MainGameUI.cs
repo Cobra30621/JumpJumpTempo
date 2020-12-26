@@ -17,6 +17,11 @@ public class MainGameUI: MonoBehaviour
     [SerializeField] private Text lab_addGrade;
     [SerializeField] private Text lab_combo;
 
+    // 問題
+    [SerializeField] private GameObject[] GO_questions;
+    private Question[] questions;
+    private Text[] lab_questions;
+
     [SerializeField] private Image img_progressBG;
     [SerializeField] private Image img_progressFG;
     [SerializeField] private Image img_timeBar;
@@ -36,11 +41,14 @@ public class MainGameUI: MonoBehaviour
     [SerializeField] private Text lab_level;
     // [SerializeField] private Button butt_Retry;
 
+    public int hadCreatedQuestionCount;
+    public float questionInterval = 1f;
+
 
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
-    void Start()
+    void Awake()
     {
         instance = this;
         Initialize();
@@ -52,17 +60,28 @@ public class MainGameUI: MonoBehaviour
     void Update()
     {
         RefreshTimeBar();
+        RefreshProgressBar();
     }
 
     public void Initialize(){
         stageSystem = GameMediator.Instance.GetStageSystem();
 
+        int length = GO_questions.Length;
+        lab_questions = new Text[3];
+        questions = new Question[3];
+        for (int i = 0; i < length; i++)
+        {
+            lab_questions[i] = GO_questions[i].GetComponent<Text>();
+            questions[i] = GO_questions[i].GetComponent<Question>();
+            questions[i].SetMainGameUI(this); 
+        }
+
         butt_A.onClick.AddListener(delegate() {
-            AnswerQuetion(Answer.A);
+            AnswerQuestion(Answer.A);
         } );
 
         butt_B.onClick.AddListener(delegate() {
-            AnswerQuetion(Answer.B);
+            AnswerQuestion(Answer.B);
         } );
     }
 
@@ -115,6 +134,13 @@ public class MainGameUI: MonoBehaviour
 
     public void PlayCorrectAnime(){
         lab_grade.GetComponent<ScalingAnime>().Scaling();
+        int count = stageSystem.hadAnswerQuestionCount;
+        questions[count - 1].ShowOutcome(true);
+    }
+
+    public void PlayWrongAnime(){
+        int count = stageSystem.hadAnswerQuestionCount;
+        questions[count - 1].ShowOutcome(false);
     }
 
     public void RefreshTimeBar(){
@@ -123,14 +149,40 @@ public class MainGameUI: MonoBehaviour
         lab_time.text = Mathf.Ceil(stageSystem.nowTime) + "";
     }
 
-    public void SetNextQuetion(){
-        lab_quetion.text = stageSystem.nowQuetion;
+    public void SetNextQuestions(){
+        // 設置題目
+        for (int i = 0 ; i < stageSystem.questionCount; i++){
+            lab_questions[i].text = stageSystem.nowQuestions[i];
+        }
+
+        hadCreatedQuestionCount = 0;
+        HideAllLabQuestion();
+        CreateQuestion();
+        // lab_quetion.text = stageSystem.nowQuetion;
         lab_combo.text = $"combo:{stageSystem.combo}";
-        RefreshProgressBar();
+        
     }
 
-    public void AnswerQuetion(Answer answer){
-        stageSystem.AnswerQuetion(answer);
+    public void CreateQuestion(){
+        if(hadCreatedQuestionCount == stageSystem.questionCount){
+            stageSystem.AllQuestionHadCreate();// 已經創造完全部的問題
+        }
+        else{ // 創造下一個題目
+            questions[hadCreatedQuestionCount].ShowQuestion(questionInterval);
+            hadCreatedQuestionCount ++ ;
+        }
+    }
+
+    public void HideAllLabQuestion(){
+        foreach (Question question in questions)
+        {
+            question.Hide();
+        }
+    }
+
+    public void AnswerQuestion(Answer answer){
+        stageSystem.AnswerQuestion(answer);
+        RefreshProgressBar();
     }
 
 

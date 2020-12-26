@@ -35,7 +35,7 @@ MonoBehaviour:
   - Stone
   stageName: OAO
   questionName: "\u4E0B\u5217\u6578\u5B57\u662F\u5426\u70BA3\u7684\u500D\u6578?"
-  totalTime: 15
+  totalTime: 30
   QA_name: "\u662F"
   QB_name: "\u5426"
   levelDatas: []

@@ -68,6 +68,7 @@
      <Compile Include="Assets\Scripts\Stage\Data\MathStageData.cs" />
      <Compile Include="Assets\Scripts\Stage\Data\StageData.cs" />
      <Compile Include="Assets\Scripts\Stage\MainGameUI.cs" />
+     <Compile Include="Assets\Scripts\Stage\Question.cs" />
      <Compile Include="Assets\Scripts\Stage\StageSystem.cs" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>/Users/cobra/Unity專案/MathGame2/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
