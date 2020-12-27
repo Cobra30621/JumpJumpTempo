@@ -33,9 +33,170 @@ MonoBehaviour:
   - Master
   - God
   - Stone
-  stageName: 
-  questionName: 
-  totalTime: 0
-  QA_name: 
-  QB_name: 
-  levelDatas: []
+  - C8763
+  stageName: "\u6210\u96D9\u6210\u5C0D"
+  questionName: "\u6210\u96D9\u6210\u5C0D\u7684\u6771\u897F"
+  totalTime: 25
+  subTime: 3
+  QA_name: O
+  QB_name: X
+  levelDatas:
+  - needCorrectCount: 3
+    addTime: 3
+    subTime: 3
+    barColor: {r: 1, g: 0, b: 0, a: 1}
+    QAs:
+    - "\u624B\u5957"
+    QBs:
+    - "\u624B\u9336"
+    - "\u5916\u5957"
+    QuestionA: "\u624B\u5957"
+    QuestionB: "\u624B\u9336 \u5916\u5957"
+  - needCorrectCount: 3
+    addTime: 3
+    subTime: 3
+    barColor: {r: 1, g: 0.64, b: 0, a: 1}
+    QAs:
+    - "\u8033\u6735"
+    QBs:
+    - "\u8033\u5C4E"
+    - "\u5641\u5FC3"
+    QuestionA: "\u8033\u6735"
+    QuestionB: "\u8033\u5C4E \u5641\u5FC3"
+  - needCorrectCount: 3
+    addTime: 3
+    subTime: 3
+    barColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+    QAs:
+    - "\u9F3B\u5B54"
+    QBs:
+    - "\u4E5D\u5B54"
+    - "\u63A7\u516B\u63A7\u63A7"
+    QuestionA: "\u9F3B\u5B54"
+    QuestionB: "\u4E5D\u5B54 \u63A7\u516B\u63A7\u63A7"
+  - needCorrectCount: 3
+    addTime: 3
+    subTime: 3
+    barColor: {r: 0, g: 1, b: 0, a: 1}
+    QAs:
+    - "\u773C\u775B"
+    QBs:
+    - "\u767C\u795E\u7D93"
+    - "\u91D1\u525B\u7D93"
+    QuestionA: "\u773C\u775B"
+    QuestionB: "\u767C\u795E\u7D93 \u91D1\u525B\u7D93"
+  - needCorrectCount: 3
+    addTime: 3
+    subTime: 3
+    barColor: {r: 0, g: 1, b: 1, a: 1}
+    QAs:
+    - "\u773C\u775B"
+    - "\u7709\u6BDB"
+    QBs:
+    - "\u767C\u795E\u7D93"
+    - "\u91D1\u525B\u7D93"
+    - "\u982D\u4E0A\u7121\u6BDB"
+    QuestionA: "\u773C\u775B \u7709\u6BDB"
+    QuestionB: "\u767C\u795E\u7D93 \u91D1\u525B\u7D93 \u982D\u4E0A\u7121\u6BDB"
+  - needCorrectCount: 3
+    addTime: 3
+    subTime: 3
+    barColor: {r: 0, g: 0, b: 1, a: 1}
+    QAs:
+    - "\u8033\u6735"
+    - "\u592B\u59BB"
+    QBs:
+    - "\u8033\u5C4E"
+    - "\u5641\u5FC3"
+    - "\u5FD7\u797A\u4E03\u4E03"
+    QuestionA: "\u8033\u6735 \u592B\u59BB"
+    QuestionB: "\u8033\u5C4E \u5641\u5FC3 \u5FD7\u797A\u4E03\u4E03"
+  - needCorrectCount: 3
+    addTime: 3
+    subTime: 3
+    barColor: {r: 0.64, g: 0, b: 1, a: 1}
+    QAs:
+    - "\u773C\u775B"
+    - "\u624B\u5957"
+    QBs:
+    - "\u767C\u795E\u7D93"
+    - "\u91D1\u525B\u7D93"
+    - "\u624B\u9336"
+    - "\u5916\u5957"
+    QuestionA: "\u773C\u775B \u624B\u5957"
+    QuestionB: "\u767C\u795E\u7D93 \u91D1\u525B\u7D93 \u624B\u9336 \u5916\u5957"
+  - needCorrectCount: 3
+    addTime: 3
+    subTime: 3
+    barColor: {r: 1, g: 1, b: 1, a: 1}
+    QAs:
+    - "\u80A9\u8180"
+    - "\u9F3B\u5B54"
+    QBs:
+    - "\u5C01\u795E\u699C"
+    - "\u4E5D\u5B54"
+    - "\u63A7\u516B\u63A7\u63A7"
+    QuestionA: "\u80A9\u8180 \u9F3B\u5B54"
+    QuestionB: "\u5C01\u795E\u699C \u4E5D\u5B54 \u63A7\u516B\u63A7\u63A7"
+  - needCorrectCount: 3
+    addTime: 3
+    subTime: 3
+    barColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    QAs:
+    - "\u592B\u59BB"
+    - "\u7B77\u5B50"
+    - "\u773C\u775B"
+    - "\u624B\u5957"
+    - "\u9F3B\u5B54"
+    - 
+    - "\u8033\u6735"
+    - "\u7709\u6BDB"
+    - "\u80A9\u8180"
+    QBs:
+    - "\u5FD7\u797A\u4E03\u4E03"
+    - "\u767C\u795E\u7D93"
+    - "\u91D1\u525B\u7D93"
+    - "\u624B\u9336"
+    - "\u5916\u5957"
+    - "\u4E5D\u5B54"
+    - "\u63A7\u516B\u63A7\u63A7"
+    - "\u5641\u5FC3"
+    - "\u8033\u5C4E"
+    - "\u982D\u4E0A\u7121\u6BDB"
+    - "\u5C01\u795E\u699C"
+    QuestionA: "\u592B\u59BB \u7B77\u5B50 \u773C\u775B \u624B\u5957 \u9F3B\u5B54  \u8033\u6735
+      \u7709\u6BDB \u80A9\u8180"
+    QuestionB: "\u5FD7\u797A\u4E03\u4E03 \u767C\u795E\u7D93 \u91D1\u525B\u7D93 \u624B\u9336
+      \u5916\u5957 \u4E5D\u5B54 \u63A7\u516B\u63A7\u63A7 \u5641\u5FC3 \u8033\u5C4E
+      \u982D\u4E0A\u7121\u6BDB \u5C01\u795E\u699C"
+  - needCorrectCount: 3
+    addTime: 3
+    subTime: 3
+    barColor: {r: 0, g: 0, b: 0, a: 1}
+    QAs:
+    - "\u592B\u59BB"
+    - "\u7B77\u5B50"
+    - "\u773C\u775B"
+    - "\u624B\u5957"
+    - "\u9F3B\u5B54"
+    - 
+    - "\u8033\u6735"
+    - "\u7709\u6BDB"
+    - "\u80A9\u8180"
+    QBs:
+    - "\u5FD7\u797A\u4E03\u4E03"
+    - "\u767C\u795E\u7D93"
+    - "\u91D1\u525B\u7D93"
+    - "\u624B\u9336"
+    - "\u5916\u5957"
+    - "\u4E5D\u5B54"
+    - "\u63A7\u516B\u63A7\u63A7"
+    - "\u5641\u5FC3"
+    - "\u8033\u5C4E"
+    - "\u982D\u4E0A\u7121\u6BDB"
+    - "\u5C01\u795E\u699C"
+    QuestionA: "\u592B\u59BB \u7B77\u5B50 \u773C\u775B \u624B\u5957 \u9F3B\u5B54  \u8033\u6735
+      \u7709\u6BDB \u80A9\u8180"
+    QuestionB: "\u5FD7\u797A\u4E03\u4E03 \u767C\u795E\u7D93 \u91D1\u525B\u7D93 \u624B\u9336
+      \u5916\u5957 \u4E5D\u5B54 \u63A7\u516B\u63A7\u63A7 \u5641\u5FC3 \u8033\u5C4E
+      \u982D\u4E0A\u7121\u6BDB \u5C01\u795E\u699C"

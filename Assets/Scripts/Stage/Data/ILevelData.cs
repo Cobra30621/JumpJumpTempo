@@ -9,7 +9,7 @@ public class ILevelData {
     public float addTime = 3;
 
     [HideInInspector]
-    public float subTime = 3;
+    public float subTime = 1;
     
     [HideInInspector]
     public Color barColor;
@@ -17,8 +17,6 @@ public class ILevelData {
 
     [HideInInspector]
     public string[] QAs;
-
-    
 
     [HideInInspector]
     public string[] QBs;

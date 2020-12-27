@@ -6,7 +6,6 @@
 /nostdlib+
 /preferreduilang:en-US
 /langversion:latest
-/reference:"Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll"
 /reference:"/Applications/Unity/Hub/Editor/2018.3.11f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll"
 /reference:"/Applications/Unity/Hub/Editor/2018.3.11f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll"
 /reference:"/Applications/Unity/Hub/Editor/2018.3.11f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.ARModule.dll"
@@ -70,6 +69,7 @@
 /reference:"/Applications/Unity/Hub/Editor/2018.3.11f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.XRModule.dll"
 /reference:"/Applications/Unity/Hub/Editor/2018.3.11f1/Unity.app/Contents/Managed/UnityEditor.dll"
 /reference:"/Applications/Unity/Hub/Editor/2018.3.11f1/Unity.app/Contents/Managed/Unity.Locator.dll"
+/reference:"Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll"
 /reference:"Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll"
 /reference:"Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll"
 /reference:"Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll"
@@ -314,4 +314,5 @@
 "Assets/Scripts/Stage/Data/MathStageData.cs"
 "Assets/Scripts/Stage/Data/StageData.cs"
 "Assets/Scripts/Stage/MainGameUI.cs"
+"Assets/Scripts/Stage/Question.cs"
 "Assets/Scripts/Stage/StageSystem.cs"

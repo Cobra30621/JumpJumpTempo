@@ -6,7 +6,7 @@ using System;
 
 public enum Answer{A = 0,B = 1};
 public enum GameState{WaitStart , Gaming};
-public enum GamingState {Questioning, Answering, Texting, Fever};
+public enum GamingState {Starting, Questioning, Answering, Texting, Fever};
 public class StageSystem : IGameSystem
 {
 	public float time;
@@ -19,10 +19,12 @@ public class StageSystem : IGameSystem
 				return time;
 		}
 	}
+	public float nowFeverTime;
+	public float maxFeverTime = 3f;
 
 	// 出題目相關
 	public float questioningInterval = 0.5f; // 出題頻率
-	public float nextTurnInterval = 0.5f; // 下一輪題目的頻率
+	public float nextTurnInterval = 0.3f; // 下一輪題目的頻率
 
 
 	// 分數相關
@@ -37,6 +39,10 @@ public class StageSystem : IGameSystem
 	public int errorCount;
 	public float correctRate;
 	public int combo;
+
+	public int correctCountInThisTurn;
+	public float maxFeverCount = 5;
+	public float feverCount;
 
 	public ILevelData _nowLevel;
 	public IStageData _nowStage;
@@ -53,6 +59,7 @@ public class StageSystem : IGameSystem
 
 	public GameState gameState;
 	public GamingState gamingState;
+	public GamingState animeCompleteState; // 動畫播完後，切換的遊戲狀態
 
 	public MainGameUI _mainGameUI;
     public StageSystem(GameMediator meditor):base(meditor)
@@ -74,10 +81,6 @@ public class StageSystem : IGameSystem
 			StartGame();
 		GameProcess();
 	}
-
-    /// <summary>
-    /// 場景的切換
-    /// </summary>
     
 
 	/// <summary>
@@ -90,6 +93,24 @@ public class StageSystem : IGameSystem
     /// <summary>
     /// 關卡的流程
     /// </summary>
+	public void StartGame(){
+		ResetStage();
+		SetLevel();
+		
+		gameState = GameState.Gaming;
+		
+		PlayTextAnime("成為Master", GamingState.Starting);
+		// CreateNextTurnQuestions();
+		// gamingState = GamingState.Questioning;
+		_mainGameUI.HideAllLabQuestion();
+		_mainGameUI.HideEndPanel();
+	}
+
+	public void EndGame(){
+		SetBestGrade();
+		_mainGameUI.ShowEndPanel();
+		gameState = GameState.WaitStart;
+	}
 
     public void GameProcess()
     {
@@ -103,39 +124,33 @@ public class StageSystem : IGameSystem
 				Debug.LogError("GameState為錯誤狀態:" + Enum.GetName(typeof(GameState), gameState ));
 				break;
 		}
-    }
-
-	public void StartGame(){
-		ResetStage();
-		SetLevel();
-		CreateNextQuestion();
-
-		gameState = GameState.Gaming;
-		gamingState = GamingState.Questioning;
-		_mainGameUI.HideEndPanel();
-	}
-
-	
+    }	
 
 	public void GamingProcess(){
 		switch(gamingState){
+			case GamingState.Starting:
+				CreateNextTurnQuestions(); 
+				break;
 			case GamingState.Questioning:
+				UpdateTime();
 				break;
 			case GamingState.Answering:
-				if(Input.GetKeyDown(KeyCode.LeftArrow))
-					AnswerQuestion(Answer.A);
-				if(Input.GetKeyDown(KeyCode.RightArrow))
-					AnswerQuestion(Answer.B);
+				UpdateTime();
+				InputProcess();
 				break;
 			case GamingState.Texting:
 				break;
 			case GamingState.Fever:
+				UpdateFeverTime();
+				InputProcess();
 				break;
 			default:
 				Debug.LogError("GamingState為錯誤狀態:" + Enum.GetName(typeof(GamingState), gamingState ));
 				break;
 		}
+	}
 
+	private void UpdateTime(){
 		time -= Time.deltaTime;
 		if(time < 0){
 			EndGame();
@@ -143,17 +158,21 @@ public class StageSystem : IGameSystem
 		}
 	}
 
-	public void EndGame(){
-		SetBestGrade();
-		_mainGameUI.ShowEndPanel();
-		gameState = GameState.WaitStart;
+	private void UpdateFeverTime(){
+		nowFeverTime -= Time.deltaTime;
+		if(nowFeverTime < 0){
+			feverCount = 0;
+			CreateNextTurnQuestions();
+			Debug.Log("Fever結束");
+		}
 	}
 
-	public void SetBestGrade(){
-		if(grade > bestGrade)
-			bestGrade = grade;
+	private void InputProcess(){
+		if(Input.GetKeyDown(KeyCode.LeftArrow))
+			AnswerQuestion(Answer.A);
+		if(Input.GetKeyDown(KeyCode.RightArrow))
+			AnswerQuestion(Answer.B);
 	}
-
 
 	/// <summary>
     /// 關卡的切換
@@ -178,6 +197,7 @@ public class StageSystem : IGameSystem
 		correctCount = 0;
 		allCorrectCount = 0;
 		errorCount = 0;
+		feverCount = 0;
 
 		nowLevel = 0;
 		_nowLevel = _levelDatas[nowLevel];
@@ -194,8 +214,12 @@ public class StageSystem : IGameSystem
 			Debug.Log($"進入第{nowLevel}關");
 			_mainGameUI.SetLevelInfo(); // 設置下一關的UI
 		}
-		else{
+		else if(nowLevel == maxLevel){
+			nowLevel ++;
 			Debug.Log("破關了");
+			time += _nowLevel.addTime;
+			addGrade = addGrades[nowLevel];
+			_mainGameUI.SetLevelInfo(); // 設置下一關的UI
 		}
 	}
 
@@ -209,57 +233,76 @@ public class StageSystem : IGameSystem
     /// 關卡內部運作
     /// </summary>
 	public void AnswerQuestion(Answer answer){
+		// Fever狀態判定
+		if(gamingState == GamingState.Fever){
+			correctCount++;
+			allCorrectCount++;
+			combo++;
+			grade += addGrade;
+			if(correctCount >= needCorrectCount){
+				UpgradeLevel(); // 到下一關
+			}
+			return;
+		}
+
 		// 設置問題
 		nowAnswer = nowAnswers[hadAnswerQuestionCount];
 		hadAnswerQuestionCount++;
 
+		if (answer == nowAnswer){ // 答對
+			correctCount++;
+			allCorrectCount++;
+			correctCountInThisTurn ++;
+			combo++;
+			grade += addGrade;
+			
+			_mainGameUI.PlayCorrectAnime();
+			Debug.Log($"答對,答對題數為{correctCount}");
+			if(correctCount >= needCorrectCount){
+				UpgradeLevel(); // 到下一關
+			}
+		}
+		else{ // 答錯
+			errorCount ++;
+			combo = 0;
+			time -= _nowStage.subTime;
+			_mainGameUI.PlayWrongAnime();
+			Debug.Log("答錯");
+		}
+
 		if(hadAnswerQuestionCount == questionCount)
 		{
 			Debug.Log("這一輪的問題答完了");
-			gamingState  = GamingState.Questioning;
-			// MonoBehaviour.StartCoroutine(WaitForCreateNextTurnQuestion());
-			CreateNextQuestion();
-		}
-		else{
-			if (answer == nowAnswer){ // 答對
-				correctCount++;
-				allCorrectCount++;
-				combo++;
-				grade += addGrade;
+			// 本輪全對，fever +1
+			if(correctCountInThisTurn >= questionCount)
+				feverCount ++;
+
 				
-				_mainGameUI.PlayCorrectAnime();
-				Debug.Log($"答對,答對題數為{correctCount}");
-				if(correctCount >= needCorrectCount){
-					UpgradeLevel(); // 到下一關
-				}
-			}
-			else{ // 答錯
-				errorCount ++;
-				combo = 0;
-				time -= _nowLevel.subTime;
-				_mainGameUI.PlayWrongAnime();
-				Debug.Log("答錯");
-			}
+			_mainGameUI.PlayTurnEndAnime(nextTurnInterval);
 		}
 	}
 
-	IEnumerator WaitForCreateNextTurnQuestion(){
-		yield return new WaitForSeconds(nextTurnInterval);
-        Debug.Log($"等待完{nextTurnInterval}秒後，創造下一輪題目");
-        CreateNextQuestion();
-	}
+	public void CreateNextTurnQuestions(){
+		if(feverCount == maxFeverCount){ 
+			// Fever數達標後，播放Fever動畫
+			_mainGameUI.HideAllLabQuestion();
+			ShowFeverAnime();
+			return;
+		}
 
-	public void CreateNextQuestion(){
+		gamingState  = GamingState.Questioning;
 		for(int i = 0; i < questionCount; i++){
 			int r = UnityEngine.Random.Range(0,2);
 			nowQuestions[i] = _nowLevel.GetQuetion(r);
 			nowAnswers[i] = (Answer)r;
 		}
 
+		correctCountInThisTurn = 0;
+
 		// nowQuetion = _nowLevel.GetQuetion(r);
 		// nowAnswer = (Answer)r;
 
-		_mainGameUI.SetNextQuestions();
+		_mainGameUI.PlayShowingQuestionsAnime();
 	}
 
 	public void AllQuestionHadCreate(){
@@ -267,16 +310,52 @@ public class StageSystem : IGameSystem
 		gamingState  = GamingState.Answering;
 	}
 
+	/// <summary>
+    /// Fever
+    /// </summary>
+	public void ShowFeverAnime(){
+		PlayTextAnime("Fever",  GamingState.Fever);
+		nowFeverTime = maxFeverTime;
+	}
+
+	
+	/// <summary>
+    /// Text
+    /// </summary>
+	public void PlayTextAnime(string info, GamingState state){
+		gamingState = GamingState.Texting;
+		animeCompleteState = state;
+		_mainGameUI.PlayTextAnime(info);
+	}
+
+	public void TextAnimeComplete(){
+		gamingState = animeCompleteState;
+	}
+
 	public Color GetBGColor(){
 		if(nowLevel == 0)
 			return Color.gray;
+		else if(nowLevel >= _levelDatas.Length){
+			return _levelDatas[_levelDatas.Length -1].barColor;
+		}
 		else
 			return _levelDatas[nowLevel -1].barColor;
 	}
 
 	public Color GetFGColor(){
-		return _levelDatas[nowLevel].barColor;
+		if(nowLevel >= _levelDatas.Length)
+			return _levelDatas[_levelDatas.Length -1].barColor;
+		else
+			return _levelDatas[nowLevel].barColor;	
 	}
+
+
+	public void SetBestGrade(){
+		if(grade > bestGrade)
+			bestGrade = grade;
+	}
+
+
 
 
 }

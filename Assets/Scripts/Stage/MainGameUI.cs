@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using DG.Tweening; // 添加這個DOTween所在的名字空間
 
 public class MainGameUI: MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class MainGameUI: MonoBehaviour
     [SerializeField] private Text lab_grade;
     [SerializeField] private Text lab_addGrade;
     [SerializeField] private Text lab_combo;
+    [SerializeField] private Text lab_fever;
 
     // 問題
     [SerializeField] private GameObject[] GO_questions;
@@ -25,6 +27,7 @@ public class MainGameUI: MonoBehaviour
     [SerializeField] private Image img_progressBG;
     [SerializeField] private Image img_progressFG;
     [SerializeField] private Image img_timeBar;
+    [SerializeField] private Image img_feverBar;
 
     [SerializeField] private Button butt_A;
     [SerializeField] private Button butt_B;
@@ -41,8 +44,12 @@ public class MainGameUI: MonoBehaviour
     [SerializeField] private Text lab_level;
     // [SerializeField] private Button butt_Retry;
 
+    [Header("顯示文字畫面")]
+    [SerializeField] private GameObject InfoPanel;
+    [SerializeField] private Text lab_info;
+
     public int hadCreatedQuestionCount;
-    public float questionInterval = 1f;
+    public float questionInterval = 0.3f;
 
 
     /// <summary>
@@ -61,6 +68,7 @@ public class MainGameUI: MonoBehaviour
     {
         RefreshTimeBar();
         RefreshProgressBar();
+        RefreshFeverBar();
     }
 
     public void Initialize(){
@@ -124,12 +132,37 @@ public class MainGameUI: MonoBehaviour
         showUpgradeAnime.Scaling(); 
     }
 
+
+    public void RefreshTimeBar(){
+        float rate = stageSystem.nowTime / stageSystem.totalTime;
+        img_timeBar.fillAmount = 1f - rate;
+        // img_timeBar.gameObject.transform.localScale = new Vector3(rate, 1, 1);
+        lab_time.text = Mathf.Ceil(stageSystem.nowTime) + "";
+    }
+
     public void RefreshProgressBar(){
         float rate = stageSystem.correctCount / stageSystem.needCorrectCount;
         if(rate > 1){rate = 1;}
 
         img_progressFG.gameObject.transform.localScale = new Vector3(rate, 1, 1);
         lab_grade.text = stageSystem.grade + "";
+    }
+
+    public void RefreshFeverBar(){
+        float rate;
+        string text;
+        if(stageSystem.gamingState == GamingState.Fever){
+            rate = stageSystem.nowFeverTime / stageSystem.maxFeverTime;
+            text = $"{Mathf.Ceil(stageSystem.nowFeverTime)}";
+        }
+        else{
+            rate = stageSystem.feverCount / stageSystem.maxFeverCount;
+            text = $"({stageSystem.feverCount} / {stageSystem.maxFeverCount})";
+        }
+        if(rate > 1){rate = 1;}
+
+        img_feverBar.gameObject.transform.localScale = new Vector3(rate, 1, 1);
+        lab_fever.text = text;
     }
 
     public void PlayCorrectAnime(){
@@ -143,13 +176,8 @@ public class MainGameUI: MonoBehaviour
         questions[count - 1].ShowOutcome(false);
     }
 
-    public void RefreshTimeBar(){
-        float rate = stageSystem.nowTime / stageSystem.totalTime;
-        img_timeBar.gameObject.transform.localScale = new Vector3(rate, 1, 1);
-        lab_time.text = Mathf.Ceil(stageSystem.nowTime) + "";
-    }
 
-    public void SetNextQuestions(){
+    public void PlayShowingQuestionsAnime(){
         // 設置題目
         for (int i = 0 ; i < stageSystem.questionCount; i++){
             lab_questions[i].text = stageSystem.nowQuestions[i];
@@ -168,6 +196,7 @@ public class MainGameUI: MonoBehaviour
             stageSystem.AllQuestionHadCreate();// 已經創造完全部的問題
         }
         else{ // 創造下一個題目
+            Debug.Log($"MainUI等待完{questionInterval}秒後，創造下一題");
             questions[hadCreatedQuestionCount].ShowQuestion(questionInterval);
             hadCreatedQuestionCount ++ ;
         }
@@ -183,6 +212,13 @@ public class MainGameUI: MonoBehaviour
     public void AnswerQuestion(Answer answer){
         stageSystem.AnswerQuestion(answer);
         RefreshProgressBar();
+    }
+
+    public void PlayTurnEndAnime(float interval){
+        Debug.Log($"等待完{interval}秒後，創造下一輪題目");
+        Sequence mySequence = DOTween.Sequence();
+        mySequence.AppendInterval(interval)
+            .OnComplete(stageSystem.CreateNextTurnQuestions);
     }
 
 
@@ -202,6 +238,34 @@ public class MainGameUI: MonoBehaviour
 
     public void Retry(){
         stageSystem.StartGame();
+    }
+
+    /// <summary>
+    ///  顯示文字畫面
+    /// </summary>
+    public void PlayTextAnime(string info){
+        lab_info.text = info;
+
+        Sequence mySequence = DOTween.Sequence();
+        mySequence.OnStart(OnStart)
+            .Append(InfoPanel.transform.DOScaleY(1, 0.5f).SetEase(Ease.OutQuint))
+            .AppendInterval(1f)
+            .Append(InfoPanel.transform.DOScaleY(0, 0.5f).SetEase(Ease.OutQuint))
+            .OnComplete(OnComplete);
+    }
+
+    private void OnStart(){
+        InfoPanel.SetActive(true);
+        InfoPanel.transform.localScale = new Vector3(1, 0, 1);
+    }
+
+    private void OnComplete(){
+        InfoPanel.SetActive(false);
+        stageSystem.TextAnimeComplete();
+    }
+
+    public void ShowCutDown(){
+
     }
 
 }

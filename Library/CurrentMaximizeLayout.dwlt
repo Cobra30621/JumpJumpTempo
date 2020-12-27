@@ -23,10 +23,10 @@ MonoBehaviour:
     y: 30
     width: 1440
     height: 721
-  m_MinSize: {x: 817, y: 274}
-  m_MaxSize: {x: 22012, y: 10024}
+  m_MinSize: {x: 815, y: 274}
+  m_MaxSize: {x: 22010, y: 10024}
   vertical: 0
-  controlID: 1038
+  controlID: 13
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -53,7 +53,7 @@ MonoBehaviour:
     width: 543
     height: 577
   m_PersistentViewDataDictionary: {fileID: 0}
-  m_MaximizeOnPlay: 1
+  m_MaximizeOnPlay: 0
   m_Gizmos: 0
   m_Stats: 0
   m_SelectedSizes: 11000000000000000000000012000000000000000000000000000000000000000000000000000000
@@ -126,8 +126,8 @@ MonoBehaviour:
     y: 0
     width: 202
     height: 721
-  m_MinSize: {x: 202, y: 224}
-  m_MaxSize: {x: 4002, y: 4024}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 4}
   m_Panes:
   - {fileID: 4}
@@ -162,23 +162,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: d6fbffffde280000
+      m_SelectedIDs: acdcffff
+      m_LastClickedID: -9044
+      m_ExpandedIDs: d6fbffff02290000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: img_barBG
+        m_OriginalName: img_barBG
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: 10518
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 3}
       m_SearchString: 
@@ -252,7 +252,7 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/General
+    - Assets/Scripts/Anime
   m_ViewMode: 0
   m_StartGridSize: 16
   m_LastFolders: []
@@ -264,7 +264,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: b6280000
     m_LastClickedID: 10422
-    m_ExpandedIDs: ffffffff000000003c260000ac260000e22600003a270000a4270000d8270000f62700008e280000
+    m_ExpandedIDs: 0000000044260000b4260000ca260000ec260000282700004627000088270000b2270000e6270000042800009e280000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -290,9 +290,9 @@ MonoBehaviour:
       m_ResourceFile: 
   m_AssetTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 10fbffff
+    m_SelectedIDs: acdcffff
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff000000003c260000ac260000e22600003a270000a4270000d8270000f62700008e280000
+    m_ExpandedIDs: ffffffff0000000044260000b4260000ca260000ec260000282700004627000088270000b2270000e6270000042800009e280000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -308,7 +308,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 5}
+      m_ClientGUIView: {fileID: 0}
     m_SearchString: 
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
@@ -317,8 +317,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 10fbffff
-    m_LastClickedInstanceID: -1264
+    m_SelectedInstanceIDs: acdcffff
+    m_LastClickedInstanceID: -9044
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: 
     m_RenameOverlay:
@@ -371,7 +371,7 @@ MonoBehaviour:
   m_MinSize: {x: 104, y: 248}
   m_MaxSize: {x: 4004, y: 8048}
   vertical: 1
-  controlID: 1039
+  controlID: 14
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -431,9 +431,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 369.0879, y: 801.00024, z: -35.779747}
+    m_Target: {x: 638.43414, y: 691.4006, z: -3.243695}
     speed: 2
-    m_Value: {x: 369.0879, y: 801.00024, z: -35.779747}
+    m_Value: {x: 638.43414, y: 691.4006, z: -3.243695}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -465,9 +465,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 1264.25
+    m_Target: 1419.6141
     speed: 2
-    m_Value: 1264.25
+    m_Value: 1419.6141
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -560,7 +560,7 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -1264
+  m_LastSelectedObjectID: -9044
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52

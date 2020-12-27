@@ -31,7 +31,7 @@ public class MathStageData : IStageData{
             if(i < Colors.Length)
                 mathLevelDatas[i].barColor = Colors[i];
             else
-                mathLevelDatas[i].barColor = Colors[7];
+                mathLevelDatas[i].barColor = Colors[mathLevelDatas.Length -1];
         } 
     }
 
