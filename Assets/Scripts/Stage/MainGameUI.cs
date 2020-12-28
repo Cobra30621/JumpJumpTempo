@@ -268,4 +268,9 @@ public class MainGameUI: MonoBehaviour
 
     }
 
+    public void SetAnswerButtonInterActeracable(bool bo){
+        butt_A.interactable = bo;
+        butt_B.interactable = bo;
+    }
+
 }

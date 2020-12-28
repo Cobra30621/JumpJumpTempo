@@ -35,6 +35,7 @@ public class StageSystem : IGameSystem
 
 	public float correctCount;
 	public float needCorrectCount;
+	public float addCorrectCount;
 	public int allCorrectCount;
 	public int errorCount;
 	public float correctRate;
@@ -100,8 +101,6 @@ public class StageSystem : IGameSystem
 		gameState = GameState.Gaming;
 		
 		PlayTextAnime("成為Master", GamingState.Starting);
-		// CreateNextTurnQuestions();
-		// gamingState = GamingState.Questioning;
 		_mainGameUI.HideAllLabQuestion();
 		_mainGameUI.HideEndPanel();
 	}
@@ -143,6 +142,33 @@ public class StageSystem : IGameSystem
 			case GamingState.Fever:
 				UpdateFeverTime();
 				InputProcess();
+				break;
+			default:
+				Debug.LogError("GamingState為錯誤狀態:" + Enum.GetName(typeof(GamingState), gamingState ));
+				break;
+		}
+	}
+
+		public void SetGamingState(GamingState state){
+		gamingState = state;
+
+		switch(gamingState){
+			case GamingState.Starting:
+				_mainGameUI.SetAnswerButtonInterActeracable(false);
+				break;
+			case GamingState.Questioning:
+				_mainGameUI.SetAnswerButtonInterActeracable(false);
+				addCorrectCount = 1f;
+				break;
+			case GamingState.Answering:
+				_mainGameUI.SetAnswerButtonInterActeracable(true);
+				break;
+			case GamingState.Texting:
+				_mainGameUI.SetAnswerButtonInterActeracable(false);
+				break;
+			case GamingState.Fever:
+				_mainGameUI.SetAnswerButtonInterActeracable(true);
+				addCorrectCount = 0.5f;
 				break;
 			default:
 				Debug.LogError("GamingState為錯誤狀態:" + Enum.GetName(typeof(GamingState), gamingState ));
@@ -235,10 +261,12 @@ public class StageSystem : IGameSystem
 	public void AnswerQuestion(Answer answer){
 		// Fever狀態判定
 		if(gamingState == GamingState.Fever){
-			correctCount++;
+			correctCount += addCorrectCount;
 			allCorrectCount++;
 			combo++;
 			grade += addGrade;
+
+			AudioSourceController.PlaySnd("correct"); // 播放音效
 			if(correctCount >= needCorrectCount){
 				UpgradeLevel(); // 到下一關
 			}
@@ -255,7 +283,8 @@ public class StageSystem : IGameSystem
 			correctCountInThisTurn ++;
 			combo++;
 			grade += addGrade;
-			
+
+			AudioSourceController.PlaySnd("correct"); // 播放音效
 			_mainGameUI.PlayCorrectAnime();
 			Debug.Log($"答對,答對題數為{correctCount}");
 			if(correctCount >= needCorrectCount){
@@ -266,6 +295,8 @@ public class StageSystem : IGameSystem
 			errorCount ++;
 			combo = 0;
 			time -= _nowStage.subTime;
+
+			AudioSourceController.PlaySnd("wrong"); // 播放音效
 			_mainGameUI.PlayWrongAnime();
 			Debug.Log("答錯");
 		}
@@ -290,7 +321,7 @@ public class StageSystem : IGameSystem
 			return;
 		}
 
-		gamingState  = GamingState.Questioning;
+		SetGamingState(GamingState.Questioning);
 		for(int i = 0; i < questionCount; i++){
 			int r = UnityEngine.Random.Range(0,2);
 			nowQuestions[i] = _nowLevel.GetQuetion(r);
@@ -307,7 +338,7 @@ public class StageSystem : IGameSystem
 
 	public void AllQuestionHadCreate(){
 		hadAnswerQuestionCount = 0;
-		gamingState  = GamingState.Answering;
+		SetGamingState(GamingState.Answering);
 	}
 
 	/// <summary>
@@ -323,13 +354,13 @@ public class StageSystem : IGameSystem
     /// Text
     /// </summary>
 	public void PlayTextAnime(string info, GamingState state){
-		gamingState = GamingState.Texting;
+		SetGamingState(GamingState.Texting);
 		animeCompleteState = state;
 		_mainGameUI.PlayTextAnime(info);
 	}
 
 	public void TextAnimeComplete(){
-		gamingState = animeCompleteState;
+		SetGamingState(animeCompleteState);
 	}
 
 	public Color GetBGColor(){
@@ -354,6 +385,8 @@ public class StageSystem : IGameSystem
 		if(grade > bestGrade)
 			bestGrade = grade;
 	}
+
+
 
 
 

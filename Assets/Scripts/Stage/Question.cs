@@ -31,6 +31,7 @@ public class Question : MonoBehaviour
     }
 
     public void ShowQuestion(float questionInterval){
+        AudioSourceController.PlaySnd("showQuestion"); // 播放音效
         this.questionInterval = questionInterval;
         this.StartCoroutine(NextQuestion());
         Scaling();
