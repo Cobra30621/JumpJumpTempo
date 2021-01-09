@@ -1,0 +1,311 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 722d6c5c7f80444398ad4cf0c4f519cb, type: 3}
+  m_Name: StageData_math7
+  m_EditorClassIdentifier: 
+  Colors:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 1, g: 0.64, b: 0, a: 1}
+  - {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 0, g: 1, b: 1, a: 1}
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 0.64, g: 0, b: 1, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  upgradeTexts:
+  - OK
+  - Good
+  - Great
+  - Prefect
+  - Excellent
+  - Pro
+  - Master
+  - God
+  - C8763
+  stageName: "7\u7684\u500D\u6578"
+  questionName: "\u4E0B\u5217\u6578\u5B57\u662F\u5426\u70BA7\u7684\u500D\u6578?"
+  totalTime: 20
+  subTime: 3
+  QA_name: O
+  QB_name: X
+  prime: 7
+  mathLevelDatas:
+  - needCorrectCount: 3
+    addTime: 1
+    subTime: 0
+    barColor: {r: 1, g: 0, b: 0, a: 1}
+    QAs:
+    - 7
+    QBs:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 8
+    - 9
+    min: 1
+    max: 10
+  - needCorrectCount: 5
+    addTime: 1
+    subTime: 0
+    barColor: {r: 1, g: 0.64, b: 0, a: 1}
+    QAs:
+    - 14
+    QBs:
+    - 11
+    - 12
+    - 13
+    - 15
+    - 16
+    - 17
+    - 18
+    - 19
+    - 20
+    min: 11
+    max: 21
+  - needCorrectCount: 7
+    addTime: 1
+    subTime: 0
+    barColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+    QAs:
+    - 21
+    - 28
+    - 35
+    QBs:
+    - 22
+    - 23
+    - 24
+    - 25
+    - 26
+    - 27
+    - 29
+    - 30
+    - 31
+    - 32
+    - 33
+    - 34
+    - 36
+    - 37
+    - 38
+    - 39
+    min: 21
+    max: 40
+  - needCorrectCount: 10
+    addTime: 2
+    subTime: 0
+    barColor: {r: 0, g: 1, b: 0, a: 1}
+    QAs:
+    - 42
+    - 49
+    QBs:
+    - 41
+    - 43
+    - 44
+    - 45
+    - 46
+    - 47
+    - 48
+    - 50
+    - 51
+    - 52
+    - 53
+    - 54
+    - 55
+    min: 41
+    max: 56
+  - needCorrectCount: 13
+    addTime: 2
+    subTime: 0
+    barColor: {r: 0, g: 1, b: 1, a: 1}
+    QAs:
+    - 56
+    - 63
+    QBs:
+    - 57
+    - 58
+    - 59
+    - 60
+    - 61
+    - 62
+    - 64
+    - 65
+    - 66
+    - 67
+    - 68
+    - 69
+    min: 56
+    max: 70
+  - needCorrectCount: 15
+    addTime: 2
+    subTime: 0
+    barColor: {r: 0, g: 0, b: 1, a: 1}
+    QAs:
+    - 70
+    - 77
+    QBs:
+    - 71
+    - 72
+    - 73
+    - 74
+    - 75
+    - 76
+    - 78
+    - 79
+    - 80
+    - 81
+    - 82
+    - 83
+    min: 70
+    max: 84
+  - needCorrectCount: 15
+    addTime: 3
+    subTime: 0
+    barColor: {r: 0.64, g: 0, b: 1, a: 1}
+    QAs:
+    - 84
+    - 91
+    QBs:
+    - 85
+    - 86
+    - 87
+    - 88
+    - 89
+    - 90
+    - 92
+    - 93
+    - 94
+    - 95
+    - 96
+    - 97
+    min: 84
+    max: 98
+  - needCorrectCount: 15
+    addTime: 5
+    subTime: 0
+    barColor: {r: 1, g: 1, b: 1, a: 1}
+    QAs:
+    - 98
+    - 105
+    - 112
+    - 119
+    - 126
+    - 133
+    QBs:
+    - 99
+    - 100
+    - 101
+    - 102
+    - 103
+    - 104
+    - 106
+    - 107
+    - 108
+    - 109
+    - 110
+    - 111
+    - 113
+    - 114
+    - 115
+    - 116
+    - 117
+    - 118
+    - 120
+    - 121
+    - 122
+    - 123
+    - 124
+    - 125
+    - 127
+    - 128
+    - 129
+    - 130
+    - 131
+    - 132
+    - 134
+    - 135
+    - 136
+    - 137
+    - 138
+    - 139
+    min: 98
+    max: 140
+  - needCorrectCount: 20
+    addTime: 5
+    subTime: 0
+    barColor: {r: 0, g: 0, b: 0, a: 1}
+    QAs:
+    - 140
+    - 147
+    - 154
+    - 161
+    - 168
+    - 175
+    - 182
+    - 189
+    - 196
+    QBs:
+    - 141
+    - 142
+    - 143
+    - 144
+    - 145
+    - 146
+    - 148
+    - 149
+    - 150
+    - 151
+    - 152
+    - 153
+    - 155
+    - 156
+    - 157
+    - 158
+    - 159
+    - 160
+    - 162
+    - 163
+    - 164
+    - 165
+    - 166
+    - 167
+    - 169
+    - 170
+    - 171
+    - 172
+    - 173
+    - 174
+    - 176
+    - 177
+    - 178
+    - 179
+    - 180
+    - 181
+    - 183
+    - 184
+    - 185
+    - 186
+    - 187
+    - 188
+    - 190
+    - 191
+    - 192
+    - 193
+    - 194
+    - 195
+    - 197
+    - 198
+    - 199
+    min: 140
+    max: 200

@@ -17,6 +17,9 @@ public class GameMediator
 		}
 	}
 
+	// 重要參數
+	private bool usingUI;
+
 	// 遊戲系統
 	private StageSystem _stageSystem;
 
@@ -45,5 +48,7 @@ public class GameMediator
 		_stageSystem.StartGame();
 	}
 
-	
+	public void SetUsingUI(bool bo){
+		usingUI = bo;
+	}
 }

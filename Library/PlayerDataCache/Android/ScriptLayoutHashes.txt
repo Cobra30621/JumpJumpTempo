@@ -166,3 +166,5 @@ d791aa6007fa3640be1164ea75bb087d Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 c6666661329916e218bee7f5e79e60f5 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 3165968ba45c74472d279ba04455fccb Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient
 8649814970b42d345b89944b862453cc Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
+09bcab47a65ab17139fbd1d88d018148 Assembly-CSharp.dll:.StageSelectedPanel
+aacac38b3a20fd62b2622954b9d93f5a Assembly-CSharp.dll:.StageSelectedBar

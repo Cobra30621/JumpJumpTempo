@@ -65,15 +65,15 @@ public class StageSystem : IGameSystem
 	public MainGameUI _mainGameUI;
     public StageSystem(GameMediator meditor):base(meditor)
 	{
-		Initialize();
 		OnSceneLoad();
+		Initialize();
 	}
 
     public override void Initialize()
     {
 		nowAnswers = new Answer[questionCount];
 		nowQuestions = new string[questionCount];
-        gameState = GameState.WaitStart;
+		SetGameState(GameState.WaitStart);
     }
 
 	public override void Update()
@@ -97,8 +97,7 @@ public class StageSystem : IGameSystem
 	public void StartGame(){
 		ResetStage();
 		SetLevel();
-		
-		gameState = GameState.Gaming;
+		SetGameState(GameState.Gaming);
 		
 		PlayTextAnime("成為Master", GamingState.Starting);
 		_mainGameUI.HideAllLabQuestion();
@@ -108,7 +107,7 @@ public class StageSystem : IGameSystem
 	public void EndGame(){
 		SetBestGrade();
 		_mainGameUI.ShowEndPanel();
-		gameState = GameState.WaitStart;
+		SetGameState(GameState.WaitStart);
 	}
 
     public void GameProcess()
@@ -149,7 +148,22 @@ public class StageSystem : IGameSystem
 		}
 	}
 
-		public void SetGamingState(GamingState state){
+	public void SetGameState(GameState state){
+		gameState = state;
+
+		switch(gameState){
+			case GameState.WaitStart:
+				_mainGameUI.SetAnswerButtonInterActeracable(false);
+				break;
+			case GameState.Gaming:
+				break;
+			default:
+				Debug.LogError("GameState為錯誤狀態:" + Enum.GetName(typeof(GameState), gameState ));
+				break;
+		}
+	}
+
+	public void SetGamingState(GamingState state){
 		gamingState = state;
 
 		switch(gamingState){
@@ -203,6 +217,12 @@ public class StageSystem : IGameSystem
 	/// <summary>
     /// 關卡的切換
     /// </summary>
+	// 切換關卡
+	public void SwitchStage(IStageData stageData){
+		SetStage(stageData);
+		StartGame();
+	}
+
 	public void SetStage(IStageData stageData){
 		_nowStage = stageData;
 		_levelDatas = stageData.GetLevelDatas();

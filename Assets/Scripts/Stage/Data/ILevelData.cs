@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class ILevelData {
-    public int needCorrectCount = 3;
-    public float addTime = 3;
+    public int needCorrectCount;
+    public float addTime;
 
     [HideInInspector]
     public float subTime = 1;
@@ -25,10 +25,10 @@ public class ILevelData {
     public virtual void SetQuetion(){}
 
     public virtual void Init(){
-        needCorrectCount = 3;
-        addTime = 3;
-        subTime = 3;
-        barColor = Color.white;
+        // needCorrectCount = 3;
+        // addTime = 3;
+        // subTime = 3;
+        // barColor = Color.white;
     }
 
     public string GetQuetion(int r){
