@@ -12,11 +12,11 @@ public class MainGameUI: MonoBehaviour
     public StageSystem stageSystem;
 
     [SerializeField] private Text lab_title;
-    [SerializeField] private Text lab_quetion;
-    [SerializeField] private Text lab_time;
+    [SerializeField] private Text lab_question;
+    // [SerializeField] private Text lab_time;
     [SerializeField] private Text lab_grade;
     [SerializeField] private Text lab_addGrade;
-    [SerializeField] private Text lab_combo;
+    // [SerializeField] private Text lab_combo;
     [SerializeField] private Text lab_fever;
 
     // 問題
@@ -51,6 +51,11 @@ public class MainGameUI: MonoBehaviour
     public int hadCreatedQuestionCount;
     public float questionInterval = 0.3f;
 
+    // ProgressBar動畫
+    public float progressBarAddTime = 0.4f;
+    private Sequence ProgressBarSequence; 
+    private bool hadChangeColor;
+
 
     /// <summary>
     /// Awake is called when the script instance is being loaded.
@@ -67,7 +72,7 @@ public class MainGameUI: MonoBehaviour
     void Update()
     {
         RefreshTimeBar();
-        RefreshProgressBar();
+        // RefreshProgressBar();
         RefreshFeverBar();
     }
 
@@ -96,13 +101,20 @@ public class MainGameUI: MonoBehaviour
     /// <summary>
     ///  設置關卡資訊
     /// </summary>
+    // 開始遊戲
+    public void StartGame(){
+        HideAllLabQuestion();
+		HideEndPanel();
+        SetBarColor();
+        RefreshProgressBar();
+    }
 
     public void SetStageInfo(){
         if(stageSystem == null)
             stageSystem = GameMediator.Instance.GetStageSystem();
 
         IStageData stageData = stageSystem._nowStage;
-        lab_title.text = stageData.questionName;
+        lab_question.text = stageData.questionName;
         
     }
 
@@ -112,41 +124,92 @@ public class MainGameUI: MonoBehaviour
         lab_A.text = stageData.QA_name;
         lab_B.text = stageData.QB_name;
         lab_addGrade.text = $"x{stageSystem.addGrade}" ;
-
-        img_progressBG.color = stageSystem.GetBGColor();
-        img_progressFG.color = stageSystem.GetFGColor();
         
-        // 播放生階動畫
+        
         int index = stageSystem.nowLevel - 1;
-        if(index <0) 
+        if(index <0){
+            lab_title.text = "";
             return;
+        }
             
+        // 播放生階動畫
         if(index >= stageData.upgradeTexts.Length)
             index = stageData.upgradeTexts.Length -1;
         
         lab_showUpgrade.text = stageData.upgradeTexts[index];
         lab_showUpgrade.color = stageSystem.GetBGColor();
+        
+        lab_title.text = stageData.upgradeTexts[index];
+        lab_title.color = stageSystem.GetBGColor();
+
         // 設定結算介面等級
         lab_level.text = stageData.upgradeTexts[index];
         lab_level.color = stageSystem.GetBGColor();
-        showUpgradeAnime.Scaling(); 
+        showUpgradeAnime.Scaling();
+
     }
+
+    // private void SetLevelUp
 
 
     public void RefreshTimeBar(){
         float rate = stageSystem.nowTime / stageSystem.totalTime;
-        img_timeBar.fillAmount = 1f - rate;
+        // img_timeBar.fillAmount = 1f - rate;
+        img_timeBar.gameObject.transform.localScale = new Vector3(1, rate, 1);
         // img_timeBar.gameObject.transform.localScale = new Vector3(rate, 1, 1);
-        lab_time.text = Mathf.Ceil(stageSystem.nowTime) + "";
+        // lab_time.text = Mathf.Ceil(stageSystem.nowTime) + "";
     }
 
     public void RefreshProgressBar(){
-        float rate = stageSystem.correctCount / stageSystem.needCorrectCount;
+        float rate = 0;
+        rate = stageSystem.correctCount / stageSystem.needCorrectCount;
         if(rate > 1){rate = 1;}
 
-        img_progressFG.gameObject.transform.localScale = new Vector3(rate, 1, 1);
+        float rateBefore = 0; // 上一個進度
+        if(stageSystem.correctCount == 0)
+            rateBefore = 0f;
+        else
+            rateBefore = (stageSystem.correctCount -1)/stageSystem.needCorrectCount;
+        Debug.Log($"rateBefore:{rateBefore}, rate:{rate}, stageSystem.correctCount:{stageSystem.correctCount} ");
+
+        img_progressFG.fillAmount = rateBefore;
+
+        // 以下Code寫得十分爛
+        // 播放設定進度條動畫
+        if(rate == 1f){ // 要升到下一階
+            ProgressBarSequence = DOTween.Sequence();
+            hadChangeColor = false;
+            ProgressBarSequence.Append(img_progressFG.DOFillAmount(1f, progressBarAddTime))
+                .OnComplete((SetBarColor)); 
+        }
+        else{ // 一般增加
+            if(!hadChangeColor){ // 當ProgressBarSequence還沒播完，這邊幫中斷
+                SetBarColor();
+                ProgressBarSequence.Kill(false);// 終止上一個動畫
+
+                // ProgressBarSequence.OnStart(()=>{img_progressFG.fillAmount = 0f;}) // 將進度條歸零在執行動畫
+                // .AppendInterval(0.1f) // 等一下子在執行動畫
+                // .OnStart(()=>{img_progressFG.fillAmount = 0f;}) // 將進度條歸零在執行動畫
+                // .Append(img_progressFG.DOFillAmount(rate, progressBarAddTime));
+                // Debug.Log("OAO");
+            }
+            ProgressBarSequence.AppendInterval(0.1f) // 等一下子在執行動畫
+            .Append(img_progressFG.DOFillAmount(rate, progressBarAddTime));
+            
+        }
+            
         lab_grade.text = stageSystem.grade + "";
     }
+
+    
+
+    private void SetBarColor(){
+        img_progressFG.fillAmount = 0f; // ProgressBar歸零
+        img_progressBG.color = stageSystem.GetBGColor();
+        img_progressFG.color = stageSystem.GetFGColor();
+        hadChangeColor = true;
+    }
+
 
     public void RefreshFeverBar(){
         float rate;
@@ -161,8 +224,8 @@ public class MainGameUI: MonoBehaviour
         }
         if(rate > 1){rate = 1;}
 
-        img_feverBar.gameObject.transform.localScale = new Vector3(rate, 1, 1);
-        lab_fever.text = text;
+        img_feverBar.gameObject.transform.localScale = new Vector3(1, rate, 1);
+        // lab_fever.text = text;
     }
 
     public void PlayCorrectAnime(){
@@ -187,7 +250,7 @@ public class MainGameUI: MonoBehaviour
         HideAllLabQuestion();
         CreateQuestion();
         // lab_quetion.text = stageSystem.nowQuetion;
-        lab_combo.text = $"combo:{stageSystem.combo}";
+        // lab_combo.text = $"combo:{stageSystem.combo}";
         
     }
 
@@ -211,7 +274,7 @@ public class MainGameUI: MonoBehaviour
 
     public void AnswerQuestion(Answer answer){
         stageSystem.AnswerQuestion(answer);
-        RefreshProgressBar();
+        //RefreshProgressBar();
     }
 
     public void PlayTurnEndAnime(float interval){

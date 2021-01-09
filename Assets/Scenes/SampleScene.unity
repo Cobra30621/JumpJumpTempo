@@ -752,11 +752,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lab_title: {fileID: 1328709260}
-  lab_quetion: {fileID: 503773287}
-  lab_time: {fileID: 2107867487}
   lab_grade: {fileID: 56829915}
   lab_addGrade: {fileID: 1731960316}
-  lab_combo: {fileID: 525612581}
   lab_fever: {fileID: 1526854455}
   GO_questions:
   - {fileID: 32413057}
@@ -2307,7 +2304,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -10.699997}
+  m_AnchoredPosition: {x: 0, y: -10.700012}
   m_SizeDelta: {x: 0, y: -223.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &805648255
@@ -3288,7 +3285,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1106388418
 RectTransform:
   m_ObjectHideFlags: 0

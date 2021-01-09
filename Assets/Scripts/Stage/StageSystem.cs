@@ -100,8 +100,7 @@ public class StageSystem : IGameSystem
 		SetGameState(GameState.Gaming);
 		
 		PlayTextAnime("成為Master", GamingState.Starting);
-		_mainGameUI.HideAllLabQuestion();
-		_mainGameUI.HideEndPanel();
+		_mainGameUI.StartGame();
 	}
 
 	public void EndGame(){
@@ -281,7 +280,8 @@ public class StageSystem : IGameSystem
 	public void AnswerQuestion(Answer answer){
 		// Fever狀態判定
 		if(gamingState == GamingState.Fever){
-			correctCount += addCorrectCount;
+			AddCorrectCount();
+			
 			allCorrectCount++;
 			combo++;
 			grade += addGrade;
@@ -298,7 +298,8 @@ public class StageSystem : IGameSystem
 		hadAnswerQuestionCount++;
 
 		if (answer == nowAnswer){ // 答對
-			correctCount++;
+			AddCorrectCount(); // 增加答對題數
+
 			allCorrectCount++;
 			correctCountInThisTurn ++;
 			combo++;
@@ -328,9 +329,16 @@ public class StageSystem : IGameSystem
 			if(correctCountInThisTurn >= questionCount)
 				feverCount ++;
 
-				
 			_mainGameUI.PlayTurnEndAnime(nextTurnInterval);
 		}
+		
+	}
+
+	public void AddCorrectCount(){
+		correctCount += addCorrectCount;
+		
+		// 更新進度條
+		_mainGameUI.RefreshProgressBar();
 	}
 
 	public void CreateNextTurnQuestions(){
