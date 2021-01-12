@@ -53,8 +53,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Anime\BarAnime.cs" />
+     <Compile Include="Assets\Scripts\Anime\IBarAnime.cs" />
      <Compile Include="Assets\Scripts\Anime\ScalingAnime.cs" />
      <Compile Include="Assets\Scripts\Anime\ShowUpgradeAnime.cs" />
+     <Compile Include="Assets\Scripts\Anime\TextInfoAnime.cs" />
      <Compile Include="Assets\Scripts\BaseClass\IGameSystem.cs" />
      <Compile Include="Assets\Scripts\Factory\AssetFactory\IAssetFactory.cs" />
      <Compile Include="Assets\Scripts\Factory\AssetFactory\ResourceAssetFactory.cs" />
@@ -68,6 +71,8 @@
      <Compile Include="Assets\Scripts\Stage\Data\MathLevelData.cs" />
      <Compile Include="Assets\Scripts\Stage\Data\MathStageData.cs" />
      <Compile Include="Assets\Scripts\Stage\Data\StageData.cs" />
+     <Compile Include="Assets\Scripts\Stage\Level\LevelBar.cs" />
+     <Compile Include="Assets\Scripts\Stage\Level\LevelBarPanel.cs" />
      <Compile Include="Assets\Scripts\Stage\MainGameUI.cs" />
      <Compile Include="Assets\Scripts\Stage\Question.cs" />
      <Compile Include="Assets\Scripts\Stage\StageSelect\StageSelectedBar.cs" />

@@ -13,7 +13,7 @@ public class MainGameUI: MonoBehaviour
 
     [SerializeField] private Text lab_title;
     [SerializeField] private Text lab_question;
-    // [SerializeField] private Text lab_time;
+    [SerializeField] private Text lab_time;
     [SerializeField] private Text lab_grade;
     [SerializeField] private Text lab_addGrade;
     // [SerializeField] private Text lab_combo;
@@ -28,6 +28,7 @@ public class MainGameUI: MonoBehaviour
     [SerializeField] private Image img_progressFG;
     [SerializeField] private Image img_timeBar;
     [SerializeField] private Image img_feverBar;
+    [SerializeField] private BarAnime feverBarAnime;
 
     [SerializeField] private Button butt_A;
     [SerializeField] private Button butt_B;
@@ -35,13 +36,18 @@ public class MainGameUI: MonoBehaviour
     [SerializeField] private Text lab_B;
     [SerializeField] private Text lab_showUpgrade;
     [SerializeField] private ShowUpgradeAnime showUpgradeAnime;
+    [SerializeField] private TextInfoAnime feverInfoAnime;
+    [SerializeField] private TextInfoAnime timeInfoAnime;
+
 
     [Header("結算畫面")]
     [SerializeField] private GameObject EndPanel;
     [SerializeField] private Text lab_Endgrade;
     [SerializeField] private Text lab_bestGrade;
     [SerializeField] private Text lab_correctCount;
+    [SerializeField] private Text lab_errorCount;
     [SerializeField] private Text lab_level;
+    [SerializeField] private Text lab_feverAvg;
     // [SerializeField] private Button butt_Retry;
 
     [Header("顯示文字畫面")]
@@ -52,9 +58,13 @@ public class MainGameUI: MonoBehaviour
     public float questionInterval = 0.3f;
 
     // ProgressBar動畫
+    [Header("ProgressBar動畫")]
     public float progressBarAddTime = 0.4f;
     private Sequence ProgressBarSequence; 
     private bool hadChangeColor;
+
+    [Header("結算升階動畫")]
+    public LevelBarPanel levelBarPanel;
 
 
     /// <summary>
@@ -73,7 +83,7 @@ public class MainGameUI: MonoBehaviour
     {
         RefreshTimeBar();
         // RefreshProgressBar();
-        RefreshFeverBar();
+        RefreshFeverBarInFeverState();
     }
 
     public void Initialize(){
@@ -157,7 +167,12 @@ public class MainGameUI: MonoBehaviour
         // img_timeBar.fillAmount = 1f - rate;
         img_timeBar.gameObject.transform.localScale = new Vector3(1, rate, 1);
         // img_timeBar.gameObject.transform.localScale = new Vector3(rate, 1, 1);
-        // lab_time.text = Mathf.Ceil(stageSystem.nowTime) + "";
+        lab_time.text = Mathf.Ceil(stageSystem.nowTime) + "";
+    }
+
+    public void PlayAddTimeAnime(string addTime){
+        string info = $"過關\nTime + {addTime}";
+        timeInfoAnime.PlayAnime(info);
     }
 
     public void RefreshProgressBar(){
@@ -211,22 +226,35 @@ public class MainGameUI: MonoBehaviour
     }
 
 
-    public void RefreshFeverBar(){
+    public void RefreshFeverBarInFeverState(){
         float rate;
         string text;
         if(stageSystem.gamingState == GamingState.Fever){
             rate = stageSystem.nowFeverTime / stageSystem.maxFeverTime;
             text = $"{Mathf.Ceil(stageSystem.nowFeverTime)}";
+            if(rate > 1){rate = 1;}
+            img_feverBar.gameObject.transform.localScale = new Vector3(1, rate, 1);
+            lab_fever.text = text;
         }
-        else{
-            rate = stageSystem.feverCount / stageSystem.maxFeverCount;
-            text = $"({stageSystem.feverCount} / {stageSystem.maxFeverCount})";
-        }
-        if(rate > 1){rate = 1;}
+        
 
-        img_feverBar.gameObject.transform.localScale = new Vector3(1, rate, 1);
-        // lab_fever.text = text;
     }
+
+    public void PlayFeverBarAnime(){
+        float rateStart = (stageSystem.feverCount - 1) / stageSystem.maxFeverCount;
+        float rateEnd = stageSystem.feverCount / stageSystem.maxFeverCount;
+
+        string text = $"{stageSystem.feverCount}";
+        if(rateEnd > 1){rateEnd = 1;}
+        if(rateStart < 0){ rateStart = 0;}
+
+        feverBarAnime.PlayAnime(rateStart , rateEnd);
+        lab_fever.text = text;
+
+        if(stageSystem.feverCount >= 1)
+            feverInfoAnime.PlayAnime(); // 顯示提示文字
+    }
+
 
     public void PlayCorrectAnime(){
         lab_grade.GetComponent<ScalingAnime>().Scaling();
@@ -291,8 +319,12 @@ public class MainGameUI: MonoBehaviour
     public void ShowEndPanel(){
         EndPanel.SetActive(true);
         lab_bestGrade.text = $"Best Grade:{stageSystem.bestGrade}";
-        lab_Endgrade.text = $"Grade:{stageSystem.grade}";
-        lab_correctCount.text = $"Correct Count:{stageSystem.allCorrectCount}";
+        lab_grade.text = $"{stageSystem.grade}";
+        lab_correctCount.text = $"O:{stageSystem.allCorrectCount}";
+        lab_errorCount.text = $"X:{stageSystem.errorCount}";
+        lab_feverAvg.text = $"FeverAvg:{stageSystem.GetFeverAvg()}";
+
+        PlayEndLevelAnime(stageSystem.nowLevel - 1);
     }
 
     public void HideEndPanel(){
@@ -301,6 +333,10 @@ public class MainGameUI: MonoBehaviour
 
     public void Retry(){
         stageSystem.StartGame();
+    }
+
+    public void PlayEndLevelAnime(int level){
+        levelBarPanel.PlayLevelAnime(level);
     }
 
     /// <summary>

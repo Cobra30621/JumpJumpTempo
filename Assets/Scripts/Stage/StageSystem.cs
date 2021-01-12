@@ -6,7 +6,7 @@ using System;
 
 public enum Answer{A = 0,B = 1};
 public enum GameState{WaitStart , Gaming};
-public enum GamingState {Starting, Questioning, Answering, Texting, Fever};
+public enum GamingState {Starting, Questioning, Answering, Texting, Fever, End};
 public class StageSystem : IGameSystem
 {
 	public float time;
@@ -37,6 +37,8 @@ public class StageSystem : IGameSystem
 	public float needCorrectCount;
 	public float addCorrectCount;
 	public int allCorrectCount;
+	public float allFeverCount;
+	public float allFeverTime;
 	public int errorCount;
 	public float correctRate;
 	public int combo;
@@ -183,6 +185,9 @@ public class StageSystem : IGameSystem
 				_mainGameUI.SetAnswerButtonInterActeracable(true);
 				addCorrectCount = 0.5f;
 				break;
+			case GamingState.End:
+				EndGame();
+				break;
 			default:
 				Debug.LogError("GamingState為錯誤狀態:" + Enum.GetName(typeof(GamingState), gamingState ));
 				break;
@@ -192,7 +197,8 @@ public class StageSystem : IGameSystem
 	private void UpdateTime(){
 		time -= Time.deltaTime;
 		if(time < 0){
-			EndGame();
+			PlayTextAnime("TimeUp", GamingState.End);
+			// EndGame();
 			Debug.Log("遊戲結束");
 		}
 	}
@@ -200,7 +206,7 @@ public class StageSystem : IGameSystem
 	private void UpdateFeverTime(){
 		nowFeverTime -= Time.deltaTime;
 		if(nowFeverTime < 0){
-			feverCount = 0;
+			SetFeverCount(0);
 			CreateNextTurnQuestions();
 			Debug.Log("Fever結束");
 		}
@@ -241,8 +247,10 @@ public class StageSystem : IGameSystem
 
 		correctCount = 0;
 		allCorrectCount = 0;
+		allFeverCount = 0;
+		allFeverTime = 0;
 		errorCount = 0;
-		feverCount = 0;
+		SetFeverCount(0);
 
 		nowLevel = 0;
 		_nowLevel = _levelDatas[nowLevel];
@@ -254,6 +262,7 @@ public class StageSystem : IGameSystem
 			nowLevel ++;
 			_nowLevel = _levelDatas[nowLevel];
 			time += _nowLevel.addTime;
+			_mainGameUI.PlayAddTimeAnime(_nowLevel.addTime + "");
 			addGrade = addGrades[nowLevel];
 			SetLevel();
 			Debug.Log($"進入第{nowLevel}關");
@@ -282,7 +291,7 @@ public class StageSystem : IGameSystem
 		if(gamingState == GamingState.Fever){
 			AddCorrectCount();
 			
-			allCorrectCount++;
+			allFeverCount++;
 			combo++;
 			grade += addGrade;
 
@@ -327,12 +336,23 @@ public class StageSystem : IGameSystem
 			Debug.Log("這一輪的問題答完了");
 			// 本輪全對，fever +1
 			if(correctCountInThisTurn >= questionCount)
-				feverCount ++;
+				AddFeverCount();
 
 			_mainGameUI.PlayTurnEndAnime(nextTurnInterval);
 		}
 		
 	}
+
+	private void AddFeverCount(){
+		feverCount ++;
+		_mainGameUI.PlayFeverBarAnime();
+	}
+
+	private void SetFeverCount(float count){
+		feverCount = count;
+		_mainGameUI.PlayFeverBarAnime();
+	}
+
 
 	public void AddCorrectCount(){
 		correctCount += addCorrectCount;
@@ -375,6 +395,7 @@ public class StageSystem : IGameSystem
 	public void ShowFeverAnime(){
 		PlayTextAnime("Fever",  GamingState.Fever);
 		nowFeverTime = maxFeverTime;
+		allFeverTime += maxFeverTime;
 	}
 
 	
@@ -414,7 +435,9 @@ public class StageSystem : IGameSystem
 			bestGrade = grade;
 	}
 
-
+	public double GetFeverAvg(){
+		return Math.Round( allFeverCount / allFeverTime, 1);
+	}
 
 
 
