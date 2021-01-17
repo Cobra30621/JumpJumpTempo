@@ -28,6 +28,7 @@ public class StageSystem : IGameSystem
 
 
 	// 分數相關
+	public string playerName = "";
 	public int grade;
 	public int addGrade;
 	public int[] addGrades = {1,2,4,6,8,10,12,15,18,21,24,30, 45, 60 };
@@ -107,6 +108,7 @@ public class StageSystem : IGameSystem
 
 	public void EndGame(){
 		SetBestGrade();
+		AddScoreToLeaderBoard(); // 將資料加入排行榜
 		_mainGameUI.ShowEndPanel();
 		SetGameState(GameState.WaitStart);
 	}
@@ -328,12 +330,12 @@ public class StageSystem : IGameSystem
 
 			AudioSourceController.PlaySnd("wrong"); // 播放音效
 			_mainGameUI.PlayWrongAnime();
-			Debug.Log("答錯");
+			// Debug.Log("答錯");
 		}
 
 		if(hadAnswerQuestionCount == questionCount)
 		{
-			Debug.Log("這一輪的問題答完了");
+			// Debug.Log("這一輪的問題答完了");
 			// 本輪全對，fever +1
 			if(correctCountInThisTurn >= questionCount)
 				AddFeverCount();
@@ -437,6 +439,22 @@ public class StageSystem : IGameSystem
 
 	public double GetFeverAvg(){
 		return Math.Round( allFeverCount / allFeverTime, 1);
+	}
+
+	/// <summary>
+    /// LeaderBoard
+    /// </summary>
+	public void SetPlayerName(string name){
+		playerName = name;
+	}
+
+	public void AddScoreToLeaderBoard(){
+		int index = nowLevel - 1;
+        if(index <0){
+            index = 0;
+        }
+		HighScoreEntry scoreEntry = new HighScoreEntry(playerName, grade, _nowStage.upgradeTexts[index] );
+		meditor.AddScore(_nowStage.stageName, scoreEntry);
 	}
 
 

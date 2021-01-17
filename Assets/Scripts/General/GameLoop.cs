@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameLoop : MonoBehaviour
 {
     public IStageData stageData;
+    public string playName;
     
     static GameLoop instance;
     void Awake () {
@@ -30,10 +31,6 @@ public class GameLoop : MonoBehaviour
     {
         GameMediator.Instance.Update();
     }
-
-
-    
-
 
 
 }

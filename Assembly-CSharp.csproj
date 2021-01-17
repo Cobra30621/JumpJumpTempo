@@ -53,6 +53,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\dreamlo\dreamloLeaderBoard.cs" />
+     <Compile Include="Assets\dreamlo\dreamloPromoCode.cs" />
+     <Compile Include="Assets\dreamlo\LeaderBoardSample.cs" />
      <Compile Include="Assets\Scripts\Anime\BarAnime.cs" />
      <Compile Include="Assets\Scripts\Anime\IBarAnime.cs" />
      <Compile Include="Assets\Scripts\Anime\ScalingAnime.cs" />
@@ -65,6 +68,11 @@
      <Compile Include="Assets\Scripts\General\AudioSourceController.cs" />
      <Compile Include="Assets\Scripts\General\GameLoop.cs" />
      <Compile Include="Assets\Scripts\General\GameMediator.cs" />
+     <Compile Include="Assets\Scripts\LeaderBoard\HighScoreEntry.cs" />
+     <Compile Include="Assets\Scripts\LeaderBoard\LeaderBoardManager.cs" />
+     <Compile Include="Assets\Scripts\LeaderBoard\LeaderBoardPanel.cs" />
+     <Compile Include="Assets\Scripts\LeaderBoard\LeaderBoardSystem.cs" />
+     <Compile Include="Assets\Scripts\LeaderBoard\ScoreCell.cs" />
      <Compile Include="Assets\Scripts\Stage\Data\ILevelData.cs" />
      <Compile Include="Assets\Scripts\Stage\Data\IStageData.cs" />
      <Compile Include="Assets\Scripts\Stage\Data\LevelData.cs" />
@@ -78,6 +86,7 @@
      <Compile Include="Assets\Scripts\Stage\StageSelect\StageSelectedBar.cs" />
      <Compile Include="Assets\Scripts\Stage\StageSelect\StageSelectedPanel.cs" />
      <Compile Include="Assets\Scripts\Stage\StageSystem.cs" />
+     <None Include="Assets\dreamlo\README_FIRST.txt" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>/Users/cobra/Unity專案/MathGame2/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
@@ -290,6 +299,9 @@
  </Reference>
  <Reference Include="UnityEngine.SpatialTracking">
  <HintPath>/Applications/Unity/Hub/Editor/2018.3.11f1/Unity.app/Contents/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
+ </Reference>
+ <Reference Include="LitJson">
+ <HintPath>/Users/cobra/Unity專案/MathGame2/Assets/Plugins/LitJson/LitJson.dll</HintPath>
  </Reference>
  <Reference Include="DOTween">
  <HintPath>/Users/cobra/Unity專案/MathGame2/Assets/Plugins/Demigiant/DOTween/DOTween.dll</HintPath>

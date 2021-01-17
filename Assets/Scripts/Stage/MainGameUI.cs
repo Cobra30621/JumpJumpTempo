@@ -185,7 +185,7 @@ public class MainGameUI: MonoBehaviour
             rateBefore = 0f;
         else
             rateBefore = (stageSystem.correctCount -1)/stageSystem.needCorrectCount;
-        Debug.Log($"rateBefore:{rateBefore}, rate:{rate}, stageSystem.correctCount:{stageSystem.correctCount} ");
+        // Debug.Log($"rateBefore:{rateBefore}, rate:{rate}, stageSystem.correctCount:{stageSystem.correctCount} ");
 
         img_progressFG.fillAmount = rateBefore;
 
@@ -306,7 +306,7 @@ public class MainGameUI: MonoBehaviour
     }
 
     public void PlayTurnEndAnime(float interval){
-        Debug.Log($"等待完{interval}秒後，創造下一輪題目");
+        // Debug.Log($"等待完{interval}秒後，創造下一輪題目");
         Sequence mySequence = DOTween.Sequence();
         mySequence.AppendInterval(interval)
             .OnComplete(stageSystem.CreateNextTurnQuestions);

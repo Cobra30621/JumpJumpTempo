@@ -22,16 +22,20 @@ public class GameMediator
 
 	// 遊戲系統
 	private StageSystem _stageSystem;
+	private LeaderBoardSystem _leaderBoardSystem;
 
 	private GameMediator(){}
 
 	public void Initinal(){
+		_leaderBoardSystem = new LeaderBoardSystem(this);
 		_stageSystem = new StageSystem(this);
 		
 	}
 
 	public void Update(){
+		_leaderBoardSystem.Update();
 		_stageSystem.Update();
+		
 	}
 
 	// ===============StageSystem================
@@ -50,5 +54,19 @@ public class GameMediator
 
 	public void SetUsingUI(bool bo){
 		usingUI = bo;
+	}
+
+	public void SetPlayerName(string name){
+		_stageSystem.SetPlayerName(name);
+	}
+
+	// ===============LeaderBoardSystem================
+
+	public void AddScore(string id , HighScoreEntry score){
+		_leaderBoardSystem.AddScore(id, score);
+	}
+
+	public LeaderBoardSystem GetLeaderBoardSystem(){
+		return _leaderBoardSystem;
 	}
 }
