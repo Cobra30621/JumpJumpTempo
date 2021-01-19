@@ -4,14 +4,18 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
 
+
 public class LeaderBoardSystem : IGameSystem
 {
+    
+    [System.Serializable]
     private class HighScores{
-        public List<HighScoreEntry> highScoreEntryList;
+        public List<HighScoreEntry> highScoreEntrys;
     }
 
 	// public MainGameUI _mainGameUI;
-    public Dictionary <string , List<HighScoreEntry>> dicHighScoreEntrys;
+    // public Dictionary <string , List<HighScoreEntry>> dicHighScoreEntrys;
+    public string stageName;
     public List<HighScoreEntry> nowHighScoreEntrys;
     public List<HighScoreEntry> oldHighScoreEntrys;
 
@@ -22,22 +26,20 @@ public class LeaderBoardSystem : IGameSystem
 
     public override void Initialize()
     {
-        LoadData();
-        dicHighScoreEntrys = new Dictionary <string , List<HighScoreEntry>>();
+        // LoadData();
+        // dicHighScoreEntrys = new Dictionary <string , List<HighScoreEntry>>();
 		// nowHighScoreEntrys = new List<HighScoreEntry>();
-        oldHighScoreEntrys = new List<HighScoreEntry>();
+        // oldHighScoreEntrys = new List<HighScoreEntry>();
     }
 
     public override void Update(){
         // PrintLeaderBoard();
     }
 
+
     public void AddScore(string id, HighScoreEntry scoreEntry){
         SetNowHighScoreEntrys(id);
-        AddScore(scoreEntry);
-    }
-
-    public void AddScore(HighScoreEntry scoreEntry){
+        
         oldHighScoreEntrys = nowHighScoreEntrys;
 
         if(CheckWhetherHad(scoreEntry)) // 如果已有玩家資料
@@ -50,11 +52,13 @@ public class LeaderBoardSystem : IGameSystem
             Debug.Log($"新增資料{scoreEntry}");
         }
             
-        
         SortNowScores();
-        SaveData();
+
+        // dicHighScoreEntrys[id] = nowHighScoreEntrys;
+        SaveData(id);
         PrintLeaderBoard();
     }
+
 
     private void AddHadScore(HighScoreEntry scoreEntry){
         foreach (HighScoreEntry score in nowHighScoreEntrys)
@@ -77,7 +81,8 @@ public class LeaderBoardSystem : IGameSystem
     }
 
     private void SortNowScores(){
-
+        // 按照分數排列
+        nowHighScoreEntrys.Sort((x, y) => -x.score.CompareTo(y.score));
     }
 
     public List<HighScoreEntry> GetHighScoreEntrys(){
@@ -85,35 +90,46 @@ public class LeaderBoardSystem : IGameSystem
     }
 
     private void SetNowHighScoreEntrys(string id){
-        if(dicHighScoreEntrys.ContainsKey(id))
-            nowHighScoreEntrys = dicHighScoreEntrys[id];
-        else
-        {
-            Debug.Log($"新增{id}的排行榜資料");
-            dicHighScoreEntrys.Add(id, new List<HighScoreEntry>());
-        }
+        LoadData(id);
+        // if(dicHighScoreEntrys.ContainsKey(id))
+        //     nowHighScoreEntrys = dicHighScoreEntrys[id];
+        // else
+        // {
+        //     Debug.Log($"新增{id}的排行榜資料");
+        //     dicHighScoreEntrys.Add(id, new List<HighScoreEntry>());
+        //     nowHighScoreEntrys = dicHighScoreEntrys[id];
+        // }
+        
     }
 
-    public void LoadData(){
-        string json = PlayerPrefs.GetString("HighScoreTable");
-        HighScores highScores =  JsonUtility.FromJson<HighScores>(json);
+    public void LoadData(string id){
+        // string json = PlayerPrefs.GetString("Dic_HighScoreTable");
+        // HighScores highScore  = JsonUtility.FromJson(json);
+        stageName = id;
+        string json = PlayerPrefs.GetString(id);
+        HighScores highScores  = JsonUtility.FromJson<HighScores>(json);
         if(highScores == null){
+            Debug.Log("Load:創造新資料");
+            // dicHighScoreEntrys = new Dictionary <string , List<HighScoreEntry>>();
             nowHighScoreEntrys = new List<HighScoreEntry>();
         }
         else{
-            nowHighScoreEntrys =  highScores.highScoreEntryList;
+            Debug.Log("Load:"+ PlayerPrefs.GetString(id));
+            // dicHighScoreEntrys =  highScores.dicHighScoreEntrys;
+            nowHighScoreEntrys = highScores.highScoreEntrys;
         }
-        
+        // dicHighScoreEntrys = new Dictionary <string , List<HighScoreEntry>>();
 
     }
 
-    public void SaveData(){
-        HighScores highScores = new HighScores{highScoreEntryList = nowHighScoreEntrys};
+    public void SaveData(string id){
+        HighScores highScores = new HighScores{highScoreEntrys = nowHighScoreEntrys};
+        // Debug.Log($"{id}:" + highScores);
 
         string json = JsonUtility.ToJson(highScores);
-        PlayerPrefs.SetString("HighScoreTable", json);
+        PlayerPrefs.SetString(id , json);
         PlayerPrefs.Save();
-        Debug.Log("Save"+ PlayerPrefs.GetString("HighScoreTable"));
+        Debug.Log($"Save{id}"+ PlayerPrefs.GetString(id));
     }
 
     public void PrintLeaderBoard(){

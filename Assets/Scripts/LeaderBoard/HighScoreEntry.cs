@@ -11,7 +11,11 @@ public class HighScoreEntry
 
     public HighScoreEntry(string name, float score, string title){
         this.score = score;
-        this.name = name;
+        if(name == "")
+            this.name = "None";
+        else
+            this.name = name;
+        
         this.title = title;
     }
 

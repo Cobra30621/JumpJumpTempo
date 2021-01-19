@@ -69,4 +69,8 @@ public class GameMediator
 	public LeaderBoardSystem GetLeaderBoardSystem(){
 		return _leaderBoardSystem;
 	}
+
+	public void LoadData(string id){
+		_leaderBoardSystem.LoadData(id);
+	}
 }

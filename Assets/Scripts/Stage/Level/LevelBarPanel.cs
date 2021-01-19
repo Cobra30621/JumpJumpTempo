@@ -18,8 +18,8 @@ public class LevelBarPanel : MonoBehaviour
         if(level < 0)
             return;
 
-        if (levelBars == null)
-            CreateAllLevelBar();
+        RemoveAllLevelBar();
+        CreateAllLevelBar();
         
         panel.SetActive(true);
         HideAllLevelBar();
@@ -56,6 +56,7 @@ public class LevelBarPanel : MonoBehaviour
         stageSystem = GameMediator.Instance.GetStageSystem();
         colors = stageSystem._nowStage.Colors;
         upgradeTexts = stageSystem._nowStage.upgradeTexts;
+        
         levelBars = new List<LevelBar>();
 
         for (int i = 0; i < colors.Length; i++)
@@ -74,5 +75,15 @@ public class LevelBarPanel : MonoBehaviour
         var l = g.GetComponent<LevelBar>();
         l.SetInfo(title, barColor); 
         levelBars.Add( l);
+    }
+
+    private void RemoveAllLevelBar(){
+        if(levelBars == null)
+            return;
+        
+        foreach(LevelBar bar in levelBars){
+            if(bar != null)
+                Destroy(bar.gameObject);
+        }
     }
 }

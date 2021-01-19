@@ -145,6 +145,8 @@ public class StageSystem : IGameSystem
 				UpdateFeverTime();
 				InputProcess();
 				break;
+			case GamingState.End:
+				break;
 			default:
 				Debug.LogError("GamingState為錯誤狀態:" + Enum.GetName(typeof(GamingState), gamingState ));
 				break;
@@ -194,6 +196,8 @@ public class StageSystem : IGameSystem
 				Debug.LogError("GamingState為錯誤狀態:" + Enum.GetName(typeof(GamingState), gamingState ));
 				break;
 		}
+
+		Debug.Log("設置GamingState:" + Enum.GetName(typeof(GamingState), gamingState ));
 	}
 
 	private void UpdateTime(){
@@ -238,6 +242,7 @@ public class StageSystem : IGameSystem
 		totalTime = stageData.totalTime;
 
 		_mainGameUI.SetStageInfo(); // 設置關卡的UI
+		meditor.LoadData(stageData.stageName); // 讀取排行榜資料
 	}
 
 	public void ResetStage(){
@@ -364,6 +369,9 @@ public class StageSystem : IGameSystem
 	}
 
 	public void CreateNextTurnQuestions(){
+		if(nowTime <=0)
+			return;
+
 		if(feverCount == maxFeverCount){ 
 			// Fever數達標後，播放Fever動畫
 			_mainGameUI.HideAllLabQuestion();
