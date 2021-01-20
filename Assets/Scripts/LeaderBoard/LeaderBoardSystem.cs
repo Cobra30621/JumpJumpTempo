@@ -18,6 +18,7 @@ public class LeaderBoardSystem : IGameSystem
     public string stageName;
     public List<HighScoreEntry> nowHighScoreEntrys;
     public List<HighScoreEntry> oldHighScoreEntrys;
+    private GoogleSheetManager googleSheetManager; // 連線存檔
 
     public LeaderBoardSystem(GameMediator meditor):base(meditor)
 	{
@@ -26,6 +27,7 @@ public class LeaderBoardSystem : IGameSystem
 
     public override void Initialize()
     {
+        googleSheetManager  = GameObject.Find("GoogleSheetManager").GetComponent<GoogleSheetManager>();
         // LoadData();
         // dicHighScoreEntrys = new Dictionary <string , List<HighScoreEntry>>();
 		// nowHighScoreEntrys = new List<HighScoreEntry>();
@@ -130,6 +132,8 @@ public class LeaderBoardSystem : IGameSystem
         PlayerPrefs.SetString(id , json);
         PlayerPrefs.Save();
         Debug.Log($"Save{id}"+ PlayerPrefs.GetString(id));
+        
+        googleSheetManager.SaveData(id, json);
     }
 
     public void PrintLeaderBoard(){

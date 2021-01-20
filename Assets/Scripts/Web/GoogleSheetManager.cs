@@ -13,8 +13,8 @@ public class GoogleSheetManager : MonoBehaviour
 
     void Awake()
     {
-        SaveData("3倍數", "Json");
-        LoadData("2的倍數");
+        // SaveData("3倍數", "Json");
+        // LoadData("2的倍數");
         
     }
 
