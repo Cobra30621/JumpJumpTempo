@@ -64,6 +64,7 @@ public class StageSystem : IGameSystem
 	public GameState gameState;
 	public GamingState gamingState;
 	public GamingState animeCompleteState; // 動畫播完後，切換的遊戲狀態
+	public bool IsPause;
 
 	public MainGameUI _mainGameUI;
     public StageSystem(GameMediator meditor):base(meditor)
@@ -108,13 +109,15 @@ public class StageSystem : IGameSystem
 
 	public void EndGame(){
 		SetBestGrade();
-		AddScoreToLeaderBoard(); // 將資料加入排行榜
 		_mainGameUI.ShowEndPanel();
 		SetGameState(GameState.WaitStart);
 	}
 
     public void GameProcess()
     {
+		if(IsPause) // 遊戲暫停中
+			return;
+
         switch(gameState){
 			case GameState.WaitStart:
 				break;
@@ -151,6 +154,16 @@ public class StageSystem : IGameSystem
 				Debug.LogError("GamingState為錯誤狀態:" + Enum.GetName(typeof(GamingState), gamingState ));
 				break;
 		}
+	}
+
+	public void Pause(){
+		IsPause = true;
+		_mainGameUI.Pause();
+	}
+
+	public void EndPause(){
+		IsPause = false;
+		_mainGameUI.EndPause();
 	}
 
 	public void SetGameState(GameState state){

@@ -60,6 +60,20 @@ public class GameMediator
 		_stageSystem.SetPlayerName(name);
 	}
 
+	// 將資料加入排行榜 ，會放在結束時出現的按鈕那邊
+	public void AddScoreToLeaderBoard(){
+		_stageSystem.AddScoreToLeaderBoard();
+	} 
+
+	//暫停遊戲
+	public void Pause(){
+		_stageSystem.Pause();
+	}
+
+	public void EndPause(){
+		_stageSystem.EndPause();
+	}
+
 	// ===============LeaderBoardSystem================
 
 	public void AddScore(string id , HighScoreEntry score){
@@ -73,4 +87,9 @@ public class GameMediator
 	public void LoadData(string id){
 		_leaderBoardSystem.LoadData(id);
 	}
+
+	public void DeleteAll()
+    {
+        _leaderBoardSystem.DeleteAll();   
+    }
 }

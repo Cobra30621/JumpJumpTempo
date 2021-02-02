@@ -20,6 +20,7 @@ public class LeaderBoardPanel : MonoBehaviour
     /// NameInputUI
     /// </summary>
     [SerializeField] private InputField Input_name;
+    [SerializeField] private Text lab_name;
     [SerializeField] private GameObject nameInputPanel;
 
     /// <summary>
@@ -90,6 +91,7 @@ public class LeaderBoardPanel : MonoBehaviour
         string name = Input_name.text;
         GameMediator.Instance.SetPlayerName(name);
         HideNameInputPanel();
+        lab_name.text = Input_name.text;
     }
 
     public void ShowNameInputPanel(){

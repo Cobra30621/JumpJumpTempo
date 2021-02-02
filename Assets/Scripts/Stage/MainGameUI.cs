@@ -109,6 +109,17 @@ public class MainGameUI: MonoBehaviour
     }
 
     /// <summary>
+    ///  暫停相關
+    /// </summary>
+    public void Pause(){
+        DOTween.PauseAll();
+    }
+
+    public void EndPause(){
+        DOTween.PlayAll();
+    }
+
+    /// <summary>
     ///  設置關卡資訊
     /// </summary>
     // 開始遊戲

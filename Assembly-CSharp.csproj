@@ -63,6 +63,7 @@
      <Compile Include="Assets\Scripts\Factory\AssetFactory\ResourceAssetFactory.cs" />
      <Compile Include="Assets\Scripts\Factory\MainFactory.cs" />
      <Compile Include="Assets\Scripts\General\AudioSourceController.cs" />
+     <Compile Include="Assets\Scripts\General\ButtonFunction.cs" />
      <Compile Include="Assets\Scripts\General\GameLoop.cs" />
      <Compile Include="Assets\Scripts\General\GameMediator.cs" />
      <Compile Include="Assets\Scripts\LeaderBoard\HighScoreEntry.cs" />

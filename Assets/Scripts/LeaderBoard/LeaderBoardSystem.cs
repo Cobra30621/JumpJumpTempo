@@ -11,11 +11,13 @@ public class LeaderBoardSystem : IGameSystem
     [System.Serializable]
     private class HighScores{
         public List<HighScoreEntry> highScoreEntrys;
+        public string nowUserName;
     }
 
 	// public MainGameUI _mainGameUI;
     // public Dictionary <string , List<HighScoreEntry>> dicHighScoreEntrys;
     public string stageName;
+    public string nowUserName;
     public List<HighScoreEntry> nowHighScoreEntrys;
     public List<HighScoreEntry> oldHighScoreEntrys;
     private GoogleSheetManager googleSheetManager; // 連線存檔
@@ -114,18 +116,20 @@ public class LeaderBoardSystem : IGameSystem
             Debug.Log("Load:創造新資料");
             // dicHighScoreEntrys = new Dictionary <string , List<HighScoreEntry>>();
             nowHighScoreEntrys = new List<HighScoreEntry>();
+            nowUserName = "None";
         }
         else{
             Debug.Log("Load:"+ PlayerPrefs.GetString(id));
             // dicHighScoreEntrys =  highScores.dicHighScoreEntrys;
             nowHighScoreEntrys = highScores.highScoreEntrys;
+            nowUserName = highScores.nowUserName;
         }
         // dicHighScoreEntrys = new Dictionary <string , List<HighScoreEntry>>();
 
     }
 
     public void SaveData(string id){
-        HighScores highScores = new HighScores{highScoreEntrys = nowHighScoreEntrys};
+        HighScores highScores = new HighScores{highScoreEntrys = nowHighScoreEntrys, nowUserName = this.nowUserName};
         // Debug.Log($"{id}:" + highScores);
 
         string json = JsonUtility.ToJson(highScores);
@@ -134,6 +138,11 @@ public class LeaderBoardSystem : IGameSystem
         Debug.Log($"Save{id}"+ PlayerPrefs.GetString(id));
         
         googleSheetManager.SaveData(id, json);
+    }
+
+    public void DeleteAll()
+    {
+        PlayerPrefs.DeleteAll();   
     }
 
     public void PrintLeaderBoard(){

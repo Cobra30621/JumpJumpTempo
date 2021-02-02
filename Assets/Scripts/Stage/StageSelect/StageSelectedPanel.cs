@@ -6,7 +6,11 @@ public class StageSelectedPanel : MonoBehaviour
 {
     private StageSystem stageSystem;
     public StageSelectedBar[] stageSelectedBars;
-    [SerializeField] private GameObject _panel;
+    [SerializeField] private GameObject selectedPanel;
+    [SerializeField] private GameObject InfoPanel;
+
+    
+
     
     // Start is called before the first frame update
     void Start()
@@ -29,22 +33,22 @@ public class StageSelectedPanel : MonoBehaviour
     }
 
     public void Open(){
-        if (_panel.activeSelf)
+        if (selectedPanel.activeSelf)
         {
             GameMediator.Instance.SetUsingUI(false);
-            _panel.SetActive(false);
+            selectedPanel.SetActive(false);
         }
-        else if (!_panel.activeSelf)
+        else if (!selectedPanel.activeSelf)
         {
             GameMediator.Instance.SetUsingUI(true);
-            _panel.SetActive(true);
+            selectedPanel.SetActive(true);
             RefreshInfo();
         }
     }
 
     public void Close(){
         GameMediator.Instance.SetUsingUI(false);
-        _panel.SetActive(false);
+        selectedPanel.SetActive(false);
     }
 
     private void RefreshInfo(){
