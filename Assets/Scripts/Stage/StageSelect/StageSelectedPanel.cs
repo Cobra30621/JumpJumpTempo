@@ -7,10 +7,10 @@ public class StageSelectedPanel : MonoBehaviour
     private StageSystem stageSystem;
     public StageSelectedBar[] stageSelectedBars;
     [SerializeField] private GameObject selectedPanel;
-    [SerializeField] private GameObject InfoPanel;
 
+    // StageInfoPanel
+    [SerializeField] private StageInfoPanel stageInfoPanel;
     
-
     
     // Start is called before the first frame update
     void Start()
@@ -59,7 +59,16 @@ public class StageSelectedPanel : MonoBehaviour
     }
 
     public void EnterStage(IStageData stageData){
+        stageSystem.EndPause();
         stageSystem.SwitchStage(stageData);
         Close();
     }
+
+    // 設置關卡資料
+    public void SetStageInfo(IStageData stageData){
+        stageInfoPanel.SetStageInfo(stageData);
+        stageInfoPanel.Open();
+    }
+
+    
 }

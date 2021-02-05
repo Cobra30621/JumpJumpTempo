@@ -275,7 +275,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8331404691847912320}
-        m_MethodName: OnEnterStage
+        m_MethodName: SetStageInfo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

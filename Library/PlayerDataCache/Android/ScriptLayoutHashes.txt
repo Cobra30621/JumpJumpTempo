@@ -120,9 +120,10 @@ db866d2176671e4406741e6857ec7231 Assembly-CSharp.dll:.ScalingAnime
 d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 303ad70ce203ad874efe2965d0fbcff9 Unity.Analytics.Tracker.dll:UnityEngine.Analytics.AnalyticsEventTracker
 7fb9de8dcf73854b6b328eca1f7a6e6d Unity.Analytics.Tracker.dll:UnityEngine.Analytics.AnalyticsTracker
-09bcab47a65ab17139fbd1d88d018148 Assembly-CSharp.dll:.StageSelectedPanel
+b1c1b0ac0f5531094b935de89d1b4512 Assembly-CSharp.dll:.StageSelectedPanel
 94017dcc9f00fe671ea7dc427b4da011 Unity.TextMeshPro.dll:TMPro.TMP_SpriteAsset
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.GoogleSheetManager
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.ButtonFunction
 b3ab2106268377ffe25dd18ac23dca28 Unity.TextMeshPro.dll:TMPro.TMP_Asset
 0b4c59dc4275eab1a5868111855f7759 Assembly-CSharp.dll:.Question
 71bb6a6b6c8f052f948db64c7dd3ca4f Unity.Analytics.Editor.dll:UnityEditor.Analytics.AnalyticsEventTrackerEditor
@@ -131,7 +132,7 @@ b3ab2106268377ffe25dd18ac23dca28 Unity.TextMeshPro.dll:TMPro.TMP_Asset
 179648033371456981a3c08cb9f47477 DOTween.dll:DG.Tweening.Core.DOTweenSettings
 ee7783e97649988390b658be384f5f5e Assembly-CSharp.dll:.StageData
 4fd8bf02e3089425d3502e26c44ba31a Unity.TextMeshPro.dll:TMPro.TextContainer
-ce7bdab74c601103b5e3400573f16c76 Assembly-CSharp.dll:.LeaderBoardPanel
+8210d137ccc2df623b6179146b0f349a Assembly-CSharp.dll:.LeaderBoardPanel
 e6ae40841db498b6e673877ac45ad208 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
 1dcb82730d983b77cec736c6ef19f814 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkDiscovery
@@ -175,3 +176,5 @@ c6666661329916e218bee7f5e79e60f5 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 8649814970b42d345b89944b862453cc Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
 aacac38b3a20fd62b2622954b9d93f5a Assembly-CSharp.dll:.StageSelectedBar
 2f2b2717431fedeccf73cb41454452fa Assembly-CSharp.dll:.TextInfoAnime
+5da30074987fdd03706efad164441e87 Assembly-CSharp.dll:.StageInfoPanel
+235a1e8275c5d1ab2a1c0f017d90e1b5 Assembly-CSharp.dll:.PausePanel

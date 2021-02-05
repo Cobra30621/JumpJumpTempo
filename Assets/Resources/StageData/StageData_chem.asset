@@ -1,0 +1,312 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaa1ef68bf98845eb99e248c79506250, type: 3}
+  m_Name: StageData_chem
+  m_EditorClassIdentifier: 
+  Colors:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 1, g: 0.64, b: 0, a: 1}
+  - {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 0, g: 0.64, b: 1, a: 1}
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 0.64, g: 0, b: 1, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  upgradeTexts:
+  - OK
+  - Good
+  - Great
+  - Prefect
+  - Excellent
+  - Pro
+  - Master
+  - God
+  - C8763
+  stageName: "\u91D1\u5C6C\u5143\u7D20"
+  questionName: "\u4E0B\u5217\u4F55\u8005\u70BA\u91D1\u5C6C\u5143\u7D20?"
+  totalTime: 30
+  subTime: 3
+  QA_name: "\u662F"
+  QB_name: "\u5426"
+  levelDatas:
+  - needCorrectCount: 3
+    addTime: 1
+    subTime: 0
+    barColor: {r: 1, g: 0, b: 0, a: 1}
+    QAs:
+    - "\u91D1"
+    - "\u9280"
+    - "\u9285"
+    - "\u9435"
+    QBs:
+    - "\u78B3"
+    - "\u786B"
+    - "\u6C2F"
+    - "\u7898"
+    - "\u7808"
+    QuestionA: "\u91D1 \u9280 \u9285 \u9435"
+    QuestionB: "\u78B3 \u786B \u6C2F \u7898 \u7808"
+  - needCorrectCount: 5
+    addTime: 1
+    subTime: 0
+    barColor: {r: 1, g: 0.64, b: 0, a: 1}
+    QAs:
+    - "\u92C1"
+    - "\u9333"
+    - "\u9209"
+    - "\u9240"
+    - "\u9382"
+    - "\u932B"
+    - "\u92F0"
+    QBs:
+    - "\u6C26"
+    - "\u6C16"
+    - "\u6C2C"
+    - "\u6C2A"
+    - "\u6C19"
+    - "\u6C21"
+    - "\u6C2E"
+    - "\u6C27"
+    - "\u6C2B"
+    - "\u6C1F"
+    QuestionA: "\u92C1 \u9333 \u9209 \u9240 \u9382 \u932B \u92F0"
+    QuestionB: "\u6C26 \u6C16 \u6C2C \u6C2A \u6C19 \u6C21 \u6C2E \u6C27 \u6C2B \u6C1F"
+  - needCorrectCount: 7
+    addTime: 1
+    subTime: 0
+    barColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+    QAs:
+    - "\u92C5"
+    - "\u9223"
+    - "\u923E"
+    - "\u6C5E"
+    QBs:
+    - "\u787C"
+    - "\u77FD"
+    - "\u78F7"
+    - "\u7837"
+    - "\u7852"
+    - "\u6EB4"
+    - "\u78B2"
+    QuestionA: "\u92C5 \u9223 \u923E \u6C5E"
+    QuestionB: "\u787C \u77FD \u78F7 \u7837 \u7852 \u6EB4 \u78B2"
+  - needCorrectCount: 10
+    addTime: 2
+    subTime: 0
+    barColor: {r: 0, g: 1, b: 0, a: 1}
+    QAs:
+    - Na
+    - K
+    - Ca
+    QBs:
+    - H
+    - C
+    - O
+    QuestionA: Na K Ca
+    QuestionB: H C O
+  - needCorrectCount: 13
+    addTime: 2
+    subTime: 0
+    barColor: {r: 0, g: 0.64, b: 1, a: 1}
+    QAs:
+    - Au
+    - Ag
+    - Cu
+    QBs:
+    - N
+    - S
+    - P
+    QuestionA: Au Ag Cu
+    QuestionB: N S P
+  - needCorrectCount: 15
+    addTime: 2
+    subTime: 0
+    barColor: {r: 0, g: 0, b: 1, a: 1}
+    QAs:
+    - Fe
+    - Al
+    - Li
+    - Mg
+    QBs:
+    - CI
+    - F
+    - I
+    QuestionA: Fe Al Li Mg
+    QuestionB: CI F I
+  - needCorrectCount: 15
+    addTime: 3
+    subTime: 0
+    barColor: {r: 0.64, g: 0, b: 1, a: 1}
+    QAs:
+    - Ni
+    - W
+    - Pt
+    - Hg
+    - Be
+    - Sr
+    - Ba
+    - Ti
+    - Cr
+    - Mn
+    - Zn
+    QBs:
+    - Si
+    - B
+    - As
+    - Br
+    - Kr
+    QuestionA: Ni W Pt Hg Be Sr Ba Ti Cr Mn Zn
+    QuestionB: Si B As Br Kr
+  - needCorrectCount: 15
+    addTime: 5
+    subTime: 0
+    barColor: {r: 1, g: 1, b: 1, a: 1}
+    QAs:
+    - Na
+    - K
+    - Ca
+    - Au
+    - Ag
+    - Cu
+    - Fe
+    - Al
+    - Li
+    - Mg
+    - Ni
+    - W
+    - Pt
+    - Hg
+    - Be
+    - Sr
+    - Ba
+    - Ti
+    - Cr
+    - Mn
+    - Zn
+    QBs:
+    - H
+    - C
+    - O
+    - N
+    - S
+    - P
+    - CI
+    - F
+    - I
+    - Si
+    - B
+    - As
+    - Br
+    - Kr
+    - Ge
+    - Se
+    - Sb
+    - Te
+    QuestionA: Na K Ca Au Ag Cu Fe Al Li Mg Ni W Pt Hg Be Sr Ba Ti Cr Mn Zn
+    QuestionB: H C O N S P CI F I Si B As Br Kr Ge Se Sb Te
+  - needCorrectCount: 20
+    addTime: 5
+    subTime: 0
+    barColor: {r: 0, g: 0, b: 0, a: 1}
+    QAs:
+    - Na
+    - K
+    - Ca
+    - Au
+    - Ag
+    - Cu
+    - Fe
+    - Al
+    - Li
+    - Mg
+    - Ni
+    - W
+    - Pt
+    - Hg
+    - Be
+    - Sr
+    - Ba
+    - Ti
+    - Cr
+    - Mn
+    - Zn
+    - "\u91D1"
+    - "\u9280"
+    - "\u9285"
+    - "\u9435"
+    - "\u92C1"
+    - "\u932B"
+    - "\u92C5"
+    - "\u92F0"
+    - "\u9209"
+    - "\u9240"
+    - "\u92A3"
+    - "\u92AB"
+    - "\u9345"
+    - "\u9239"
+    - "\u9382"
+    - "\u9223"
+    - "\u9376"
+    - "\u92C7"
+    - "\u9433"
+    - "\u923E"
+    - "\u9237"
+    - "\u93B3"
+    - "\u9333"
+    QBs:
+    - H
+    - C
+    - O
+    - N
+    - S
+    - P
+    - CI
+    - F
+    - I
+    - Si
+    - B
+    - As
+    - Br
+    - Kr
+    - Ge
+    - Se
+    - Sb
+    - Te
+    - "\u6C2B"
+    - "\u787C"
+    - "\u78B3"
+    - "\u6C2E"
+    - "\u6C27"
+    - "\u6C1F"
+    - "\u77FD"
+    - "\u78F7"
+    - "\u786B"
+    - "\u6C2F"
+    - "\u7837"
+    - "\u7852"
+    - "\u6EB4"
+    - "\u78B2"
+    - "\u7898"
+    - "\u7808"
+    - "\u6C26"
+    - "\u6C16"
+    - "\u6C2C"
+    - "\u6C2A"
+    - "\u6C19"
+    - "\u6C21"
+    QuestionA: "Na K Ca Au Ag Cu Fe Al Li Mg Ni W Pt Hg Be Sr Ba Ti Cr Mn Zn \u91D1
+      \u9280 \u9285 \u9435 \u92C1 \u932B \u92C5 \u92F0 \u9209 \u9240 \u92A3 \u92AB
+      \u9345 \u9239 \u9382 \u9223 \u9376 \u92C7 \u9433 \u923E \u9237 \u93B3 \u9333"
+    QuestionB: "H C O N S P CI F I Si B As Br Kr Ge Se Sb Te \u6C2B \u787C \u78B3
+      \u6C2E \u6C27 \u6C1F \u77FD \u78F7 \u786B \u6C2F \u7837 \u7852 \u6EB4 \u78B2
+      \u7898 \u7808 \u6C26 \u6C16 \u6C2C \u6C2A \u6C19 \u6C21"

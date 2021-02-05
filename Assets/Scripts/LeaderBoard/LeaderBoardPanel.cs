@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class LeaderBoardPanel : MonoBehaviour
 {
     [SerializeField] private GameObject scoreBarPrefab;
-    [SerializeField] private GameObject leaderBoardPanel;
+    // [SerializeField] private GameObject leaderBoardPanel;
     [SerializeField] private Transform bar_pos;
     [SerializeField] private Text lab_stageName;
     private LeaderBoardSystem leaderBoardSystem;
@@ -29,20 +29,31 @@ public class LeaderBoardPanel : MonoBehaviour
     /// </summary>
     void Start()
     {
-        leaderBoardSystem = GameMediator.Instance.GetLeaderBoardSystem();
+        GetLeaderBoardSystem();
+    }
+
+    // 設定排行榜的資料
+    public void SetStageData(string id){
+        GetLeaderBoardSystem();
+        leaderBoardSystem.SetNowHighScoreEntrys(id);
+    }
+
+    private void GetLeaderBoardSystem(){
+        if(leaderBoardSystem == null)
+            leaderBoardSystem = GameMediator.Instance.GetLeaderBoardSystem();
     }
 
     /// <summary>
     /// 排行榜相關
     /// </summary>
     public void ShowLeaderBoardPanel(){
-        leaderBoardPanel.SetActive(true);
+        // leaderBoardPanel.SetActive(true);
         RemoveAllScoreBar();
         CreateAllLevelBar();
     }
 
     public void HideLeaderBoardPanel(){
-        leaderBoardPanel.SetActive(false);
+        // leaderBoardPanel.SetActive(false);
     }
 
 

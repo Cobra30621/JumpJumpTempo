@@ -79,7 +79,9 @@
      <Compile Include="Assets\Scripts\Stage\Level\LevelBar.cs" />
      <Compile Include="Assets\Scripts\Stage\Level\LevelBarPanel.cs" />
      <Compile Include="Assets\Scripts\Stage\MainGameUI.cs" />
+     <Compile Include="Assets\Scripts\Stage\PausePanel.cs" />
      <Compile Include="Assets\Scripts\Stage\Question.cs" />
+     <Compile Include="Assets\Scripts\Stage\StageSelect\StageInfoPanel.cs" />
      <Compile Include="Assets\Scripts\Stage\StageSelect\StageSelectedBar.cs" />
      <Compile Include="Assets\Scripts\Stage\StageSelect\StageSelectedPanel.cs" />
      <Compile Include="Assets\Scripts\Stage\StageSystem.cs" />

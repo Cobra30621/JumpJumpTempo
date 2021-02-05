@@ -15,18 +15,6 @@ public class StageSelectedBar : MonoBehaviour
     private StageSelectedPanel stageSelectedPanel;
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void Init (StageSelectedPanel panel){
         stageSelectedPanel = panel;
         RefreshInfo();
@@ -41,9 +29,26 @@ public class StageSelectedBar : MonoBehaviour
 
     public void RefreshInfo(){
         lab_stageName.text = _stageData.stageName;
+        SetTitleInfo();
     }
 
     public void OnEnterStage(){
         stageSelectedPanel.EnterStage(_stageData);
+    }
+
+    public void SetStageInfo(){
+        stageSelectedPanel.SetStageInfo(_stageData);
+    }
+
+    // 取得每一關的最高等級
+    public void SetTitleInfo(){
+        int id = GameMediator.Instance.GetStageTitleID(_stageData.stageName);
+        if(id == -1){
+            lab_title.text = "";
+        }
+        else{
+            lab_title.text = _stageData.upgradeTexts[id];
+            lab_title.color = _stageData.Colors[id];
+        }
     }
 }

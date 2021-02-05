@@ -92,4 +92,8 @@ public class GameMediator
     {
         _leaderBoardSystem.DeleteAll();   
     }
+
+	public int GetStageTitleID(string stageName){
+        return _leaderBoardSystem.GetStageTitleID(stageName);
+    }
 }

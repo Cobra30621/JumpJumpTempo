@@ -93,7 +93,7 @@ public class LeaderBoardSystem : IGameSystem
         return nowHighScoreEntrys;
     }
 
-    private void SetNowHighScoreEntrys(string id){
+    public void SetNowHighScoreEntrys(string id){
         LoadData(id);
         // if(dicHighScoreEntrys.ContainsKey(id))
         //     nowHighScoreEntrys = dicHighScoreEntrys[id];
@@ -104,6 +104,21 @@ public class LeaderBoardSystem : IGameSystem
         //     nowHighScoreEntrys = dicHighScoreEntrys[id];
         // }
         
+    }
+
+    public int GetStageTitleID(string stageName){
+        stageName = stageName;
+        string json = PlayerPrefs.GetString(stageName);
+        HighScores highScores  = JsonUtility.FromJson<HighScores>(json);
+        if(highScores == null ){
+            return -1;
+        }
+        else{
+            if(highScores.highScoreEntrys.Count == 0)
+                return -1;
+            
+            return highScores.highScoreEntrys[0].titleID;
+        }
     }
 
     public void LoadData(string id){

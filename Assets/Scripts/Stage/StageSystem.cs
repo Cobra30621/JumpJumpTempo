@@ -78,6 +78,7 @@ public class StageSystem : IGameSystem
 		nowAnswers = new Answer[questionCount];
 		nowQuestions = new string[questionCount];
 		SetGameState(GameState.WaitStart);
+		Pause(); 
     }
 
 	public override void Update()
@@ -157,11 +158,13 @@ public class StageSystem : IGameSystem
 	}
 
 	public void Pause(){
+		Debug.Log("暫停遊戲");
 		IsPause = true;
 		_mainGameUI.Pause();
 	}
 
 	public void EndPause(){
+		Debug.Log("取消暫停遊戲");
 		IsPause = false;
 		_mainGameUI.EndPause();
 	}
@@ -199,8 +202,9 @@ public class StageSystem : IGameSystem
 				_mainGameUI.SetAnswerButtonInterActeracable(false);
 				break;
 			case GamingState.Fever:
+				_mainGameUI.PlayFeveringAnime();// 播放Fever中的動畫
 				_mainGameUI.SetAnswerButtonInterActeracable(true);
-				addCorrectCount = 0.5f;
+				addCorrectCount = 0.3f;
 				break;
 			case GamingState.End:
 				EndGame();
@@ -225,6 +229,7 @@ public class StageSystem : IGameSystem
 	private void UpdateFeverTime(){
 		nowFeverTime -= Time.deltaTime;
 		if(nowFeverTime < 0){
+			_mainGameUI.EndFeveringAnime();
 			SetFeverCount(0);
 			CreateNextTurnQuestions();
 			Debug.Log("Fever結束");
@@ -387,7 +392,7 @@ public class StageSystem : IGameSystem
 
 		if(feverCount == maxFeverCount){ 
 			// Fever數達標後，播放Fever動畫
-			_mainGameUI.HideAllLabQuestion();
+			_mainGameUI.HideAllLabQuestion(); 
 			ShowFeverAnime();
 			return;
 		}
@@ -419,6 +424,7 @@ public class StageSystem : IGameSystem
 		PlayTextAnime("Fever",  GamingState.Fever);
 		nowFeverTime = maxFeverTime;
 		allFeverTime += maxFeverTime;
+		
 	}
 
 	
@@ -471,10 +477,13 @@ public class StageSystem : IGameSystem
 
 	public void AddScoreToLeaderBoard(){
 		int index = nowLevel - 1;
+		int titleID = nowLevel - 1;
         if(index <0){
             index = 0;
         }
 		HighScoreEntry scoreEntry = new HighScoreEntry(playerName, grade, _nowStage.upgradeTexts[index] );
+		scoreEntry.SetTitleID(titleID); 
+
 		meditor.AddScore(_nowStage.stageName, scoreEntry);
 	}
 

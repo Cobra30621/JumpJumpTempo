@@ -18,6 +18,7 @@ public class MainGameUI: MonoBehaviour
     [SerializeField] private Text lab_addGrade;
     // [SerializeField] private Text lab_combo;
     [SerializeField] private Text lab_fever;
+    [SerializeField] private GameObject panel_fever;
 
     // 問題
     [SerializeField] private GameObject[] GO_questions;
@@ -117,6 +118,10 @@ public class MainGameUI: MonoBehaviour
 
     public void EndPause(){
         DOTween.PlayAll();
+    }
+
+    public void StopGame(){
+        
     }
 
     /// <summary>
@@ -266,6 +271,14 @@ public class MainGameUI: MonoBehaviour
             feverInfoAnime.PlayAnime(); // 顯示提示文字
     }
 
+    public void PlayFeveringAnime(){
+        panel_fever.SetActive(true);
+    }
+
+    public void EndFeveringAnime(){
+        panel_fever.SetActive(false);
+    }
+
 
     public void PlayCorrectAnime(){
         lab_grade.GetComponent<ScalingAnime>().Scaling();
@@ -322,6 +335,8 @@ public class MainGameUI: MonoBehaviour
         mySequence.AppendInterval(interval)
             .OnComplete(stageSystem.CreateNextTurnQuestions);
     }
+
+    
 
 
     /// <summary>
