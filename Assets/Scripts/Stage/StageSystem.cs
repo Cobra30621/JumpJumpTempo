@@ -239,9 +239,9 @@ public class StageSystem : IGameSystem
 
 	private void InputProcess(){
 		if(Input.GetKeyDown(KeyCode.LeftArrow))
-			AnswerQuestion(Answer.A);
-		if(Input.GetKeyDown(KeyCode.RightArrow))
 			AnswerQuestion(Answer.B);
+		if(Input.GetKeyDown(KeyCode.RightArrow))
+			AnswerQuestion(Answer.A);
 	}
 
 	/// <summary>

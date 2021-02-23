@@ -17,6 +17,14 @@ public class BarLevelPanel : MonoBehaviour
         CreateAllBarLevelCeil();
     }
 
+    // 將LeverBar反轉
+    public void ReverseBarOrder(){
+        for (int i = 0; i < barLevelCeils.Count; i++)
+        {
+            barLevelCeils[i].transform.SetAsFirstSibling();
+        }
+    }
+
     public void CloseLevelBar(){
         foreach (var bar in barLevelCeils)
         {

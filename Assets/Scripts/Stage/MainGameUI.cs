@@ -152,8 +152,10 @@ public class MainGameUI: MonoBehaviour
     public void SetLevelInfo(){
         ILevelData levelData = stageSystem._nowLevel;
         IStageData stageData = stageSystem._nowStage;
-        lab_A.text = stageData.QA_name;
-        lab_B.text = stageData.QB_name;
+        lab_A.text = "O";
+        lab_B.text = "X";
+        // lab_A.text = stageData.QA_name;
+        // lab_B.text = stageData.QB_name;
         lab_addGrade.text = $"x{stageSystem.addGrade}" ;
         
         

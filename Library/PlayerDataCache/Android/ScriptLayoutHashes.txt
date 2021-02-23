@@ -87,7 +87,7 @@ fc108ce7d98c40ac0907e8ca7f500c76 UnityEngine.UI.dll:UnityEngine.UI.Text
 0fd6822f6177297bd0eb4d83cc7a9030 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 abf1930d8126d0b2e00e9449129a0190 UnityEngine.UI.dll:UnityEngine.EventSystems.TouchInputModule
 64e54c0cbb0177c5ea26f340efb9ff85 UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
-6bf1c77979d50ebb291e374e5e9c3bd9 Assembly-CSharp.dll:.MainGameUI
+c1f758e5703e3977a120f645d6f2f393 Assembly-CSharp.dll:.MainGameUI
 bc66ed0926ca0f81a62a6f5be839ca38 Assembly-CSharp.dll:.LevelBarPanel
 235a1e8275c5d1ab2a1c0f017d90e1b5 Assembly-CSharp.dll:.PausePanel
 a79ecbb64fb3144c771cad830b5be528 Assembly-CSharp.dll:.BarAnime
@@ -127,7 +127,7 @@ b1c1b0ac0f5531094b935de89d1b4512 Assembly-CSharp.dll:.StageSelectedPanel
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.GoogleSheetManager
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.ButtonFunction
 b3ab2106268377ffe25dd18ac23dca28 Unity.TextMeshPro.dll:TMPro.TMP_Asset
-0b4c59dc4275eab1a5868111855f7759 Assembly-CSharp.dll:.Question
+e8ab0973cc08b219da2b1f6c59d6e67c Assembly-CSharp.dll:.Question
 71bb6a6b6c8f052f948db64c7dd3ca4f Unity.Analytics.Editor.dll:UnityEditor.Analytics.AnalyticsEventTrackerEditor
 71bb6a6b6c8f052f948db64c7dd3ca4f Unity.TextMeshPro.dll:TMPro.TMP_SpriteAnimator
 704dcd31abc789439bc3f3cd10b58c2b DOTween.dll:DG.Tweening.Core.DOTweenComponent
@@ -176,5 +176,7 @@ d791aa6007fa3640be1164ea75bb087d Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 c6666661329916e218bee7f5e79e60f5 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 3165968ba45c74472d279ba04455fccb Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient
 8649814970b42d345b89944b862453cc Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
-aacac38b3a20fd62b2622954b9d93f5a Assembly-CSharp.dll:.StageSelectedBar
+2ec1d5795c5b6ae1ffca848f8f51a885 Assembly-CSharp.dll:.StageSelectedBar
 2f2b2717431fedeccf73cb41454452fa Assembly-CSharp.dll:.TextInfoAnime
+121bc83b8a6040787b720ae06d2f563b Assembly-CSharp.dll:.BarLevelCeil
+9927dc8931ff8e67cdfdfd1c1f534a1b Assembly-CSharp.dll:.BarLevelPanel
