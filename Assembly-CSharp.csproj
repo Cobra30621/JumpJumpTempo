@@ -70,6 +70,8 @@
      <Compile Include="Assets\Scripts\LeaderBoard\LeaderBoardPanel.cs" />
      <Compile Include="Assets\Scripts\LeaderBoard\LeaderBoardSystem.cs" />
      <Compile Include="Assets\Scripts\LeaderBoard\ScoreBar.cs" />
+     <Compile Include="Assets\Scripts\Stage\BarLevelCeil.cs" />
+     <Compile Include="Assets\Scripts\Stage\BarLevelPanel.cs" />
      <Compile Include="Assets\Scripts\Stage\Data\ILevelData.cs" />
      <Compile Include="Assets\Scripts\Stage\Data\IStageData.cs" />
      <Compile Include="Assets\Scripts\Stage\Data\LevelData.cs" />

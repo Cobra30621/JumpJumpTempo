@@ -13,6 +13,7 @@ public class StageSelectedBar : MonoBehaviour
 
     public IStageData _stageData;
     private StageSelectedPanel stageSelectedPanel;
+    [SerializeField] private BarLevelPanel barLevelPanel;
 
 
     public void Init (StageSelectedPanel panel){
@@ -23,6 +24,7 @@ public class StageSelectedBar : MonoBehaviour
     public void Init(IStageData stageData, StageSelectedPanel panel){
         _stageData = stageData;
         stageSelectedPanel = panel;
+        barLevelPanel.Init(stageData);
         RefreshInfo();
 
     }
@@ -49,6 +51,7 @@ public class StageSelectedBar : MonoBehaviour
         else{
             lab_title.text = _stageData.upgradeTexts[id];
             lab_title.color = _stageData.Colors[id];
+            barLevelPanel.SetLevelBar(id);
         }
     }
 }

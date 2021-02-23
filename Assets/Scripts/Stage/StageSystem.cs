@@ -33,6 +33,7 @@ public class StageSystem : IGameSystem
 	public int addGrade;
 	public int[] addGrades = {1,2,4,6,8,10,12,15,18,21,24,30, 45, 60 };
 	public int bestGrade;
+	public float fever_plus = 0.3f;
 
 	public float correctCount;
 	public float needCorrectCount;
@@ -204,7 +205,7 @@ public class StageSystem : IGameSystem
 			case GamingState.Fever:
 				_mainGameUI.PlayFeveringAnime();// 播放Fever中的動畫
 				_mainGameUI.SetAnswerButtonInterActeracable(true);
-				addCorrectCount = 0.3f;
+				addCorrectCount = fever_plus;
 				break;
 			case GamingState.End:
 				EndGame();
@@ -318,7 +319,7 @@ public class StageSystem : IGameSystem
 			
 			allFeverCount++;
 			combo++;
-			grade += addGrade;
+			grade +=  Convert.ToInt16(Math.Ceiling(addGrade * fever_plus)) ; // 因Fever變小
 
 			AudioSourceController.PlaySnd("correct"); // 播放音效
 			if(correctCount >= needCorrectCount){

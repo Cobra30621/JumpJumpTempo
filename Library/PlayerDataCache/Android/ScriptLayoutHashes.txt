@@ -21,6 +21,7 @@ e1bbf0ab858085e38fae6b12ebbdcd35 UnityEngine.Timeline.dll:UnityEngine.Timeline.P
 e7a73f5f78ba6445195ec23b74a1ce2d Unity.TextMeshPro.dll:TMPro.TMP_ScrollbarEventHandler
 ec81179b9e41fc585200f29c2f94e187 Assembly-CSharp.dll:.ScoreBar
 d5bf78c74c85c11380a2215631564d8f Assembly-CSharp.dll:.ShowUpgradeAnime
+5da30074987fdd03706efad164441e87 Assembly-CSharp.dll:.StageInfoPanel
 cf9f5cf2c3145a37ac07f00e50e460f9 UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
 5fc094978ce3e3591a7500ed380d854a UnityEngine.UI.dll:UnityEngine.UI.Button
@@ -86,8 +87,9 @@ fc108ce7d98c40ac0907e8ca7f500c76 UnityEngine.UI.dll:UnityEngine.UI.Text
 0fd6822f6177297bd0eb4d83cc7a9030 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 abf1930d8126d0b2e00e9449129a0190 UnityEngine.UI.dll:UnityEngine.EventSystems.TouchInputModule
 64e54c0cbb0177c5ea26f340efb9ff85 UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
-eb920c15ca925134b182ee5c6c3bb337 Assembly-CSharp.dll:.MainGameUI
+6bf1c77979d50ebb291e374e5e9c3bd9 Assembly-CSharp.dll:.MainGameUI
 bc66ed0926ca0f81a62a6f5be839ca38 Assembly-CSharp.dll:.LevelBarPanel
+235a1e8275c5d1ab2a1c0f017d90e1b5 Assembly-CSharp.dll:.PausePanel
 a79ecbb64fb3144c771cad830b5be528 Assembly-CSharp.dll:.BarAnime
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 06f0fef534ca4c1d6064fd77a26bf722 UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
@@ -176,5 +178,3 @@ c6666661329916e218bee7f5e79e60f5 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 8649814970b42d345b89944b862453cc Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
 aacac38b3a20fd62b2622954b9d93f5a Assembly-CSharp.dll:.StageSelectedBar
 2f2b2717431fedeccf73cb41454452fa Assembly-CSharp.dll:.TextInfoAnime
-5da30074987fdd03706efad164441e87 Assembly-CSharp.dll:.StageInfoPanel
-235a1e8275c5d1ab2a1c0f017d90e1b5 Assembly-CSharp.dll:.PausePanel

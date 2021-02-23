@@ -315,6 +315,7 @@
 "Assets/Scripts/LeaderBoard/LeaderBoardPanel.cs"
 "Assets/Scripts/LeaderBoard/LeaderBoardSystem.cs"
 "Assets/Scripts/LeaderBoard/ScoreBar.cs"
+"Assets/Scripts/Stage/BarLevelCeil.cs"
 "Assets/Scripts/Stage/Data/ILevelData.cs"
 "Assets/Scripts/Stage/Data/IStageData.cs"
 "Assets/Scripts/Stage/Data/LevelData.cs"

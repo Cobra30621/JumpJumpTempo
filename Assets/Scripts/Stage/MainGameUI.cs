@@ -40,14 +40,16 @@ public class MainGameUI: MonoBehaviour
     [SerializeField] private TextInfoAnime feverInfoAnime;
     [SerializeField] private TextInfoAnime timeInfoAnime;
 
+    [SerializeField] private BarLevelPanel barLevelPanel;
+
 
     [Header("結算畫面")]
     [SerializeField] private GameObject EndPanel;
-    [SerializeField] private Text lab_Endgrade;
+    // [SerializeField] private Text lab_Endgrade;
     [SerializeField] private Text lab_bestGrade;
     [SerializeField] private Text lab_correctCount;
     [SerializeField] private Text lab_errorCount;
-    [SerializeField] private Text lab_level;
+    // [SerializeField] private Text lab_level;
     [SerializeField] private Text lab_feverAvg;
     // [SerializeField] private Button butt_Retry;
 
@@ -107,6 +109,8 @@ public class MainGameUI: MonoBehaviour
         butt_B.onClick.AddListener(delegate() {
             AnswerQuestion(Answer.B);
         } );
+
+        barLevelPanel.CreateAllBarLevelCeil(); // 創造所有進度條
     }
 
     /// <summary>
@@ -133,6 +137,7 @@ public class MainGameUI: MonoBehaviour
 		HideEndPanel();
         SetBarColor();
         RefreshProgressBar();
+        barLevelPanel.CloseLevelBar(); 
     }
 
     public void SetStageInfo(){
@@ -169,9 +174,12 @@ public class MainGameUI: MonoBehaviour
         lab_title.color = stageSystem.GetBGColor();
 
         // 設定結算介面等級
-        lab_level.text = stageData.upgradeTexts[index];
-        lab_level.color = stageSystem.GetBGColor();
+        // lab_level.text = stageData.upgradeTexts[index];
+        // lab_level.color = stageSystem.GetBGColor();
         showUpgradeAnime.Scaling();
+
+        // 
+        barLevelPanel.SetLevelBar(index);
 
     }
 
@@ -283,12 +291,14 @@ public class MainGameUI: MonoBehaviour
     public void PlayCorrectAnime(){
         lab_grade.GetComponent<ScalingAnime>().Scaling();
         int count = stageSystem.hadAnswerQuestionCount;
-        questions[count - 1].ShowOutcome(true);
+        float addGrade = stageSystem.addGrade;
+        questions[count - 1].ShowOutcome(true, addGrade);
     }
 
     public void PlayWrongAnime(){
         int count = stageSystem.hadAnswerQuestionCount;
-        questions[count - 1].ShowOutcome(false);
+        
+        questions[count - 1].ShowOutcome(false, 0f);
     }
 
 
@@ -350,7 +360,7 @@ public class MainGameUI: MonoBehaviour
         lab_errorCount.text = $"X:{stageSystem.errorCount}";
         lab_feverAvg.text = $"FeverAvg:{stageSystem.GetFeverAvg()}";
 
-        PlayEndLevelAnime(stageSystem.nowLevel - 1);
+        // PlayEndLevelAnime(stageSystem.nowLevel - 1);
     }
 
     public void HideEndPanel(){

@@ -12,23 +12,10 @@ public class Question : MonoBehaviour
 
     [SerializeField] private Text lab_outcome;
 
-    private Text lab_question;
+    [SerializeField] private Text lab_question;
     private float questionInterval;
     private MainGameUI _mainGameUI;
 
-    /// <summary>
-    /// Awake is called when the script instance is being loaded.
-    /// </summary>
-    void Awake()
-    {
-        lab_question = gameObject.GetComponent<Text>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void ShowQuestion(float questionInterval){
         AudioSourceController.PlaySnd("showQuestion"); // 播放音效
@@ -51,11 +38,11 @@ public class Question : MonoBehaviour
         transform.localScale = Vector3.zero;
     }
 
-    public void ShowOutcome(bool outcome){
+    public void ShowOutcome(bool outcome, float grade){
         // Scaling();
-        // lab_outcome.gameObject.SetActive(true);
+        lab_outcome.gameObject.SetActive(true);
         if(outcome){
-            lab_outcome.text = "O";
+            lab_outcome.text = $"+{grade}";
             lab_question.color = Color.green;
         }
         else{
