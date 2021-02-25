@@ -1,4 +1,0 @@
-#Tue Feb 23 19:29:07 CST 2021
-base.0=/Users/cobra/Unity專案/MathGame2/Temp/gradleOut/build/intermediates/transforms/dexMerger/debug/0
-path.0=classes.dex
-renamed.0=classes.dex
